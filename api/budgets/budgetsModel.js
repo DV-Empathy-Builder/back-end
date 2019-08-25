@@ -6,6 +6,7 @@ module.exports = {
     remove,
     addBudget,
     addBudgetLines,
+    
 };
 
 function getByUserId(id) {
@@ -42,3 +43,4 @@ function addBudgetLines(lines, id) {
         .insert(lines)
         .then(() => getLinesById(id));
 }
+

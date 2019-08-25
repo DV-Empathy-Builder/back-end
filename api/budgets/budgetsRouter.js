@@ -32,23 +32,33 @@ router.get('/:id/savedBudgets/:budgetID', async (req, res, next) => {
 router.post('/:id/savedBudgets', async (req, res, next) => {
     try {
         const budget_name = req.body.budget_name;
-        const lines = req.body.lines;
         const user_id = req.params.id;
         const newBudget = { budget_name, user_id };
         const createdBudget = await Budgets.addBudget(newBudget);
-        lines.forEach(line => {
-            line.user_id = +user_id;
-            line.budget_name_id = createdBudget.budget_name_id;
-        });
-        const fullBudget = await Budgets.addBudgetLines(
-            lines,
-            createdBudget.budget_name_id
-        );
-        res.status(200).json(fullBudget);
+        res.status(201).json(createdBudget);
     } catch (err) {
         next({ err, stat: 500, message: 'Error creating a new budget.' });
     }
 });
+
+router.post('/:id/savedBudgets/:budgetID', async(req, res, next) => {
+    try{
+        const lines = req.body.lines;
+        const user_id = req.params.id;
+        const budgetID = req.params.budgetID
+        lines.forEach(line => {
+            line.user_id = +user_id;
+            line.budget_name_id = +budgetID;
+        });
+        const fullBudget = await Budgets.addBudgetLines(
+            lines,
+            budgetID
+        );
+        res.status(201).json(fullBudget);
+    }catch(err){
+        next({err, stat: 500, message: 'Error adding budget lines.'})
+    }
+})
 
 router.delete('/:id/savedBudgets/:budgetID', async (req, res, next) => {
     try {

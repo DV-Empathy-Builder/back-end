@@ -6,6 +6,7 @@ const budgetsRouter = require('./budgets/budgetsRouter');
 const categoriesRouter = require('./categories/categoriesRouter');
 const authRouter = require('./auth/authRouter');
 const { restriction } = require('./auth/authMiddleware');
+
 const server = express();
 
 server.use(helmet());
@@ -14,7 +15,7 @@ server.use(cors());
 
 server.use('/auth', authRouter);
 server.use('/categories', restriction, categoriesRouter);
-// server.use('/user', budgetsRouter )
+server.use('/users', budgetsRouter);
 
 server.get('/', (req, res, next) => {
     res.send('Server is working!');

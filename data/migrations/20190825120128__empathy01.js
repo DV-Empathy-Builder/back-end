@@ -10,9 +10,7 @@ exports.up = function(knex) {
         })
         .createTable('categories', categories => {
             categories.increments('category_id');
-            categories
-                .string('category_name')
-                .notNullable()
+            categories.string('category_name').notNullable();
             categories
                 .integer('user_id')
                 .unsigned()
@@ -25,6 +23,14 @@ exports.up = function(knex) {
             budget_names.increments('budget_name_id');
             budget_names.string('budget_name').notNullable();
             budget_names.timestamps(true, true);
+            budget_names
+                .integer('user_id')
+                .unsigned()
+                .notNullable()
+                .references('user_id')
+                .inTable('users')
+                .onDelete('CASCADE')
+                .onUpdate('CASCADE');
         })
         .createTable('stored_budget_lines', stored_budget_lines => {
             stored_budget_lines.increments('line_id');

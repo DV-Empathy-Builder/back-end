@@ -34,7 +34,7 @@ router.post('/login', checkValidUserData, async (req, res, next) => {
             storedUser &&
             bcrypt.compareSync(user.password, storedUser.password)
         ) {
-            const token = generateToken(user);
+            const token = generateToken(storedUser);
             res.status(200).json({
                 message: `Welcome ${user.username}!`,
                 token,
@@ -50,7 +50,7 @@ router.post('/login', checkValidUserData, async (req, res, next) => {
 
 function generateToken(user) {
     const payload = {
-        subject: user.id,
+        subject: user.user_id,
         username: user.username,
     };
 

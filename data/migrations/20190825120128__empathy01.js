@@ -13,7 +13,13 @@ exports.up = function(knex) {
             categories
                 .string('category_name')
                 .notNullable()
-                .unique();
+            categories
+                .integer('user_id')
+                .unsigned()
+                .references('user_id')
+                .inTable('users')
+                .onDelete('CASCADE')
+                .onUpdate('CASCADE');
         })
         .createTable('budget_names', budget_names => {
             budget_names.increments('budget_name_id');

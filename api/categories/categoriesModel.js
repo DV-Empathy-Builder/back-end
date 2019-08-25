@@ -9,8 +9,8 @@ module.exports = {
     remove,
 };
 
-function getAll() {
-    return db('categories');
+function getAll(id) {
+    return db('categories').whereNull('user_id').orWhere('user_id', id);
 }
 
 function findById(id) {
@@ -29,16 +29,16 @@ function insert(category) {
         .then(([id]) => findById(id));
 }
 
-function update(category, id) {
+function update(category, id, user_id) {
     return db('categories')
         .where({ category_id: id })
         .update(category)
-        .then(() => getAll());
+        .then(() => getAll(user_id));
 }
 
-function remove(id) {
+function remove(id, user_id) {
     return db('categories')
         .where({ category_id: id })
         .delete()
-        .then(() => getAll());
+        .then(() => getAll(user_id));
 }

@@ -1,0 +1,63 @@
+{
+    "name": "back-end",
+    "version": "1.0.0",
+    "description": "Back-end for the empathy builder calculator.",
+    "main": "index.js",
+    "scripts": {
+        "server": "nodemon index.js",
+        "start": "node index.js",
+        "test": "cross-env DB_ENV=testing jest -i --watch",
+        "api-docs": "apidoc -f .js -i ./api -o apidoc/",
+        "build-docs": "apidoc-markdown -p ./apidoc -o README.md",
+        "build-api": "npm-run-all api-docs build-docs",
+        "rollback": "knex migrate:rollback --env production",
+        "migrate": "knex migrate:latest --env production",
+        "seed": "knex seed:run --env production"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DV-Empathy-Builder/back-end.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/DV-Empathy-Builder/back-end/issues"
+    },
+    "homepage": "https://github.com/DV-Empathy-Builder/back-end#readme",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "dotenv": "^8.1.0",
+        "express": "^4.17.1",
+        "helmet": "^3.20.0",
+        "jsonwebtoken": "^8.5.1",
+        "knex": "^0.19.2",
+        "knex-cleaner": "^1.3.0",
+        "npm-run-all": "^4.1.5",
+        "pg": "^7.12.1",
+        "sqlite3": "^4.1.0"
+    },
+    "devDependencies": {
+        "cross-env": "^5.2.0",
+        "jest": "^24.9.0",
+        "nodemon": "^1.19.1",
+        "supertest": "^4.0.2"
+    },
+    "apidoc": {
+        "name": "Domestic Violence Empathy Builder",
+        "version": "1.0.0",
+        "description": "API for the empathy builder calculator for freeform.org.",
+        "title": "Domestic Violence Empathy Builder",
+        "url": "http://localhost:5500/",
+        "sampleUrl": "http://localhost:5500/",
+        "template": {
+            "withGenerator": true,
+            "withCompare": true
+        }
+    },
+    "jest": {
+        "testEnvironment": "node"
+    }
+}

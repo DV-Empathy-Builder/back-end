@@ -6,7 +6,7 @@ module.exports = {
     remove,
     addBudget,
     addBudgetLines,
-    
+    updateName
 };
 
 function getByUserId(id) {
@@ -20,10 +20,10 @@ function getLinesById(id) {
         .where('s.budget_name_id', id);
 }
 
-function remove(id) {
+function remove(id, user_id) {
     return db('budget_names')
         .where({ budget_name_id: id })
-        .delete();
+        .delete().then(() => getByUserId(user_id));
 }
 
 function findById(id) {
@@ -44,3 +44,11 @@ function addBudgetLines(lines, id) {
         .then(() => getLinesById(id));
 }
 
+function updateName(changes, id, user_id) {
+    return db('budget_names')
+        .where('budget_name_id', id)
+        .update(changes)
+        .then(() => getByUserId(user_id));
+}
+
+function updateLines() {}

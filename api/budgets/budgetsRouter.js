@@ -41,7 +41,7 @@ router.post('/:id/savedBudgets', async (req, res, next) => {
     }
 });
 
-router.post('/:id/savedBudgets/:budgetID', async(req, res, next) => {
+router.post('/:id/savedBudgets/:budgetID/lines', async(req, res, next) => {
     try{
         const lines = req.body.lines;
         const user_id = req.params.id;
@@ -63,8 +63,8 @@ router.post('/:id/savedBudgets/:budgetID', async(req, res, next) => {
 router.delete('/:id/savedBudgets/:budgetID', async (req, res, next) => {
     try {
         const id = req.params.budgetID;
-        const amt = await Budgets.remove(id);
-        res.status(200).json({ message: `You deleted ${amt} budgets.` });
+        const remainingBudgets = await Budgets.remove(id, req.params.id);
+        res.status(200).json(remainingBudgets);
     } catch (err) {
         next({ err, stat: 500, message: 'Error removing a specific budget.' });
     }
@@ -72,8 +72,21 @@ router.delete('/:id/savedBudgets/:budgetID', async (req, res, next) => {
 
 router.put('/:id/savedBudgets/:budgetID', async (req, res, next) => {
     try {
+        const budget_name = req.body.budget_name;
+        const user_id = req.params.id;
+        const budgetId = req.params.budgetID;
+        const updatedBudget = await Budgets.updateName({budget_name, user_id}, budgetId, user_id)
+        res.status(200).json(updatedBudget);
     } catch (err) {
         next({ err, stat: 500, message: 'Error editing a budget.' });
+    }
+});
+
+router.put('/:id/savedBudgets/:budgetID', async (req, res, next) => {
+    try {
+        
+    } catch (err) {
+        next({ err, stat: 500, message: 'Error editing a budget\'s lines.' });
     }
 });
 

@@ -14,12 +14,13 @@ server.use(cors())
 
 server.use('/auth', authRouter)
 server.use('/categories', categoriesRouter)
-server.use('/user', budgetsRouter )
-server.use(errorHandler)
+// server.use('/user', budgetsRouter )
 
 server.get('/', (req, res, next) => {
     res.send('Server is working!')    
 });
+
+server.use(errorHandler)
 
 function errorHandler(error, req, res, next){
     console.log(error.err)

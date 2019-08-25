@@ -15,7 +15,7 @@ router.post(
             const hash = bcrypt.hashSync(user.password, 10);
             user.password = hash;
             const newUser = await Users.insert(user);
-            res.status(201).json(newUser);
+            res.status(201).json({user_id: newUser.user_id, username: newUser.username});
         } catch (err) {
             next({
                 err,

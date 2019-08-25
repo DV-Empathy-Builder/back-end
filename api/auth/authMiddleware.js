@@ -8,7 +8,7 @@ module.exports = {
 
 function checkValidUserData(req, res, next) {
     const user = req.body;
-    if (!user.username || !user.passowrd)
+    if (!user.username || !user.password)
         next({
             stat: 400,
             message: 'Please send both a password and username.',

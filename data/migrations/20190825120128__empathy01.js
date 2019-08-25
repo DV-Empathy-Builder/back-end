@@ -20,14 +20,14 @@ exports.up = function(knex) {
             budget_names.string('budget_name').notNullable();
             budget_names.timestamps(true, true);
         })
-        .createTable('recurring_budget', recurring_budget => {
-            recurring_budget.increments('recurring_item_id');
-            recurring_budget
+        .createTable('stored_budget_lines', stored_budget_lines => {
+            stored_budget_lines.increments('line_id');
+            stored_budget_lines
                 .integer('amount')
                 .unsigned()
                 .notNullable()
                 .defaultTo(0);
-            recurring_budget
+            stored_budget_lines
                 .integer('user_id')
                 .unsigned()
                 .notNullable()
@@ -35,7 +35,7 @@ exports.up = function(knex) {
                 .inTable('users')
                 .onDelete('CASCADE')
                 .onUpdate('CASCADE');
-            recurring_budget
+            stored_budget_lines
                 .integer('category_id')
                 .unsigned()
                 .notNullable()
@@ -43,31 +43,7 @@ exports.up = function(knex) {
                 .inTable('categories')
                 .onDelete('CASCADE')
                 .onUpdate('CASCADE');
-        })
-        .createTable('relocation_budget', relocation_budget => {
-            relocation_budget.increments('recurring_item_id');
-            relocation_budget
-                .integer('amount')
-                .unsigned()
-                .notNullable()
-                .defaultTo(0);
-            relocation_budget
-                .integer('user_id')
-                .unsigned()
-                .notNullable()
-                .references('user_id')
-                .inTable('users')
-                .onDelete('CASCADE')
-                .onUpdate('CASCADE');
-            relocation_budget
-                .integer('category_id')
-                .unsigned()
-                .notNullable()
-                .references('category_id')
-                .inTable('categories')
-                .onDelete('CASCADE')
-                .onUpdate('CASCADE');
-            relocation_budget
+            stored_budget_lines
                 .integer('budget_name_id')
                 .unsigned()
                 .notNullable()
@@ -80,8 +56,7 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
     return knex.schema
-        .dropTableIfExists('recurring_budget')
-        .dropTableIfExists('relocation_budget')
+        .dropTableIfExists('stored_budget_lines')
         .dropTableIfExists('users')
         .dropTableIfExists('categories')
         .dropTableIfExists('budget_names');

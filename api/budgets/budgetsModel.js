@@ -8,6 +8,7 @@ module.exports = {
     addBudgetLines,
     updateName,
     updateLines,
+    findById
 };
 
 function getByUserId(id) {

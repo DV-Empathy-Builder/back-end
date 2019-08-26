@@ -6,7 +6,8 @@ module.exports = {
     remove,
     addBudget,
     addBudgetLines,
-    updateName
+    updateName,
+    updateLines,
 };
 
 function getByUserId(id) {
@@ -16,14 +17,15 @@ function getByUserId(id) {
 function getLinesById(id) {
     return db('stored_budget_lines as s')
         .join('categories as c', 'c.category_id', 's.category_id')
-        .select('s.line_id', 's.amount', 'c.category_name')
+        .select('s.line_id', 's.amount', 'c.category_id')
         .where('s.budget_name_id', id);
 }
 
 function remove(id, user_id) {
     return db('budget_names')
         .where({ budget_name_id: id })
-        .delete().then(() => getByUserId(user_id));
+        .delete()
+        .then(() => getByUserId(user_id));
 }
 
 function findById(id) {
@@ -51,4 +53,8 @@ function updateName(changes, id, user_id) {
         .then(() => getByUserId(user_id));
 }
 
-function updateLines() {}
+function updateLines(changes) {
+    return db('stored_budget_lines as s')
+        .where('s.line_id', changes.line_id)
+        .update(changes);
+}

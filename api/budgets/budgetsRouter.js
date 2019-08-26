@@ -41,24 +41,21 @@ router.post('/:id/savedBudgets', async (req, res, next) => {
     }
 });
 
-router.post('/:id/savedBudgets/:budgetID/lines', async(req, res, next) => {
-    try{
+router.post('/:id/savedBudgets/:budgetID/lines', async (req, res, next) => {
+    try {
         const lines = req.body.lines;
         const user_id = req.params.id;
-        const budgetID = req.params.budgetID
+        const budgetID = req.params.budgetID;
         lines.forEach(line => {
             line.user_id = +user_id;
             line.budget_name_id = +budgetID;
         });
-        const fullBudget = await Budgets.addBudgetLines(
-            lines,
-            budgetID
-        );
+        const fullBudget = await Budgets.addBudgetLines(lines, budgetID);
         res.status(201).json(fullBudget);
-    }catch(err){
-        next({err, stat: 500, message: 'Error adding budget lines.'})
+    } catch (err) {
+        next({ err, stat: 500, message: 'Error adding budget lines.' });
     }
-})
+});
 
 router.delete('/:id/savedBudgets/:budgetID', async (req, res, next) => {
     try {
@@ -75,18 +72,35 @@ router.put('/:id/savedBudgets/:budgetID', async (req, res, next) => {
         const budget_name = req.body.budget_name;
         const user_id = req.params.id;
         const budgetId = req.params.budgetID;
-        const updatedBudget = await Budgets.updateName({budget_name, user_id}, budgetId, user_id)
+        const updatedBudget = await Budgets.updateName(
+            { budget_name, user_id },
+            budgetId,
+            user_id
+        );
         res.status(200).json(updatedBudget);
     } catch (err) {
         next({ err, stat: 500, message: 'Error editing a budget.' });
     }
 });
 
-router.put('/:id/savedBudgets/:budgetID', async (req, res, next) => {
+router.put('/:id/savedBudgets/:budgetID/lines', async (req, res, next) => {
     try {
-        
+        const oldBudget = await Budgets.getLinesById(req.params.budgetID);
+        const changes = req.body.lines;
+        oldBudget.forEach(async line => {
+            let changedLine = changes.find(
+                line2 => line.category_id === line2.category_id
+            );
+            if (line.amount !== changedLine.amount)
+                await Budgets.updateLines({
+                    amount: changedLine.amount,
+                    line_id: line.line_id,
+                });
+        });
+        const newBudget = await Budgets.getLinesById(req.params.budgetID);
+        res.status(200).json(newBudget);
     } catch (err) {
-        next({ err, stat: 500, message: 'Error editing a budget\'s lines.' });
+        next({ err, stat: 500, message: "Error editing a budget's lines." });
     }
 });
 

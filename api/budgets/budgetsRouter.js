@@ -8,10 +8,10 @@ const Budgets = require('./budgetsModel');
 
 //router.use('/:id/savedBudgets/:budgetID, validBudgetID)
 
-router.get('/:id/savedBudgets', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
-        const id = req.params.id;
-        const budgets = await Budgets.getByUserId(id);
+        const user_id = req.token.subject;
+        const budgets = await Budgets.getByUserId(user_id);
         let budgetsToReturn = budgets.length < 2 ? budgets[0] : budgets;
         res.status(200).json(budgetsToReturn);
     } catch (err) {
@@ -19,9 +19,9 @@ router.get('/:id/savedBudgets', async (req, res, next) => {
     }
 });
 
-router.get('/:id/savedBudgets/:budgetID', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
     try {
-        const id = req.params.budgetID;
+        const { id } = req.params;
         const budget = await Budgets.getLinesById(id);
         res.status(200).json(budget);
     } catch (err) {
@@ -29,10 +29,10 @@ router.get('/:id/savedBudgets/:budgetID', async (req, res, next) => {
     }
 });
 
-router.post('/:id/savedBudgets', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     try {
         const budget_name = req.body.budget_name;
-        const user_id = req.params.id;
+        const user_id = req.token.subject;
         const newBudget = { budget_name, user_id };
         const createdBudget = await Budgets.addBudget(newBudget);
         res.status(201).json(createdBudget);
@@ -41,40 +41,41 @@ router.post('/:id/savedBudgets', async (req, res, next) => {
     }
 });
 
-router.post('/:id/savedBudgets/:budgetID/lines', async (req, res, next) => {
+router.post('/:id', async (req, res, next) => {
     try {
         const lines = req.body.lines;
-        const user_id = req.params.id;
-        const budgetID = req.params.budgetID;
+        const user_id = req.token.subject;
+        const { id } = req.params;
         lines.forEach(line => {
             line.user_id = +user_id;
-            line.budget_name_id = +budgetID;
+            line.budget_name_id = +id;
         });
-        const fullBudget = await Budgets.addBudgetLines(lines, budgetID);
+        const fullBudget = await Budgets.addBudgetLines(lines, id);
         res.status(201).json(fullBudget);
     } catch (err) {
         next({ err, stat: 500, message: 'Error adding budget lines.' });
     }
 });
 
-router.delete('/:id/savedBudgets/:budgetID', async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
     try {
-        const id = req.params.budgetID;
-        const remainingBudgets = await Budgets.remove(id, req.params.id);
+        const { id } = req.params;
+        const user_id = req.token.subject;
+        const remainingBudgets = await Budgets.remove(id, user_id);
         res.status(200).json(remainingBudgets);
     } catch (err) {
         next({ err, stat: 500, message: 'Error removing a specific budget.' });
     }
 });
 
-router.put('/:id/savedBudgets/:budgetID', async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
     try {
         const budget_name = req.body.budget_name;
-        const user_id = req.params.id;
-        const budgetId = req.params.budgetID;
+        const user_id = req.token.subject;
+        const { id } = req.params;
         const updatedBudget = await Budgets.updateName(
             { budget_name, user_id },
-            budgetId,
+            id,
             user_id
         );
         res.status(200).json(updatedBudget);
@@ -83,9 +84,9 @@ router.put('/:id/savedBudgets/:budgetID', async (req, res, next) => {
     }
 });
 
-router.put('/:id/savedBudgets/:budgetID/lines', async (req, res, next) => {
+router.put('/:id/lines', async (req, res, next) => {
     try {
-        const oldBudget = await Budgets.getLinesById(req.params.budgetID);
+        const oldBudget = await Budgets.getLinesById(req.params.id);
         const changes = req.body.lines;
         oldBudget.forEach(async line => {
             let changedLine = changes.find(
@@ -97,7 +98,7 @@ router.put('/:id/savedBudgets/:budgetID/lines', async (req, res, next) => {
                     line_id: line.line_id,
                 });
         });
-        const newBudget = await Budgets.getLinesById(req.params.budgetID);
+        const newBudget = await Budgets.getLinesById(req.params.id);
         res.status(200).json(newBudget);
     } catch (err) {
         next({ err, stat: 500, message: "Error editing a budget's lines." });

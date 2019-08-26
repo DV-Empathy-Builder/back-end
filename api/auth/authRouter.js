@@ -6,7 +6,7 @@ const { checkValidUserData, checkValidUsername } = require('./authMiddleware');
 const Users = require('./authModel');
 
 /**
- * @api {post} /auth/register Register New User
+ * @api {post} auth/register Register New User
  * @apiName PostRegister
  * @apiGroup Auth
  * 

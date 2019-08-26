@@ -1,9 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-const path = require('path')
-
-const apiDoc = path.join(__dirname, '../apidoc')
+const path = require('path');
+const bodyParser = require('body-parser');
+const apiDoc = path.join(__dirname, '../apidoc');
 
 const budgetsRouter = require('./budgets/budgetsRouter');
 const categoriesRouter = require('./categories/categoriesRouter');
@@ -15,12 +15,13 @@ const server = express();
 server.use(helmet());
 server.use(express.json());
 server.use(cors());
+server.use(bodyParser.urlencoded({ extended: true }));
 
 server.use('/auth', authRouter);
 server.use('/categories', restriction, categoriesRouter);
-server.use('/users', budgetsRouter);
+server.use('/budgets', budgetsRouter);
 
-server.use('/', express.static(apiDoc))
+server.use('/', express.static(apiDoc));
 
 server.use(errorHandler);
 

@@ -5,10 +5,10 @@ const Budgets = require('./budgetsModel');
 const {
     validBudgetID,
     validBudgetName,
-    validOwnerID,
+    validateOwnerID,
 } = require('./budgetsMiddleware');
 
-router.use('/:id', validBudgetID, validOwnerID);
+router.use('/:id', validBudgetID, validateOwnerID);
 
 router.get('/', async (req, res, next) => {
     try {

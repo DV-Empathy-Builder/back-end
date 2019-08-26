@@ -50,8 +50,8 @@
         "version": "1.0.0",
         "description": "API for the empathy builder calculator for freeform.org.",
         "title": "Domestic Violence Empathy Builder",
-        "url": "http://localhost:5500/",
-        "sampleUrl": "http://localhost:5500/",
+        "url": "https://dv-empathy.herokuapp.com/",
+        "sampleUrl": "https://dv-empathy.herokuapp.com/",
         "template": {
             "withGenerator": true,
             "withCompare": true

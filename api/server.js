@@ -1,6 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
+const path = require('path')
+
+const apiDoc = path.join(__dirname, '../apidoc')
 
 const budgetsRouter = require('./budgets/budgetsRouter');
 const categoriesRouter = require('./categories/categoriesRouter');
@@ -17,9 +20,7 @@ server.use('/auth', authRouter);
 server.use('/categories', restriction, categoriesRouter);
 server.use('/users', budgetsRouter);
 
-server.get('/', (req, res, next) => {
-    res.send('Server is working!');
-});
+server.use('/', express.static(apiDoc))
 
 server.use(errorHandler);
 

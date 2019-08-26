@@ -5,6 +5,31 @@ const jwt = require('jsonwebtoken');
 const { checkValidUserData, checkValidUsername } = require('./authMiddleware');
 const Users = require('./authModel');
 
+/**
+ * @api {post} /auth/register Register New User
+ * @apiName PostRegister
+ * @apiGroup Auth
+ * 
+ * @apiSuccess {Object} newUser User's id and username.
+ * 
+ * @apiSuccessExample Success-Response:
+ *      HTTP 201 Created
+ *      {
+ *          "user_id": 3,
+ *          "username": "abc123"
+ *      }
+ * 
+ * @apiError MissingData The username or password was not submitted.
+ * @apiError TakenUsername  The username is already in use.
+ * 
+ * @apiErrorExample Error-Response
+ *      HTTP 400 Bad Request
+ *      {
+ *          "error": "Please send both username and password."
+ *      }
+ * 
+ * @apiSampleRequest url
+ */
 router.post(
     '/register',
     checkValidUserData,

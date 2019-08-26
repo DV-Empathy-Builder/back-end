@@ -8,6 +8,7 @@ module.exports = {
 
 function checkValidUserData(req, res, next) {
     const user = req.body;
+    console.log('validData', user)
     if (!user.username || !user.password)
         next({
             stat: 400,
@@ -18,7 +19,9 @@ function checkValidUserData(req, res, next) {
 
 async function checkValidUsername(req, res, next) {
     const user = req.body;
+    console.log('checkValidUsername')
     const storedUser = await Users.findByUsername(user.username);
+    console.log('got storeduser from db', storedUser)
     if (storedUser && user.username === storedUser.username)
         next({
             stat: 400,

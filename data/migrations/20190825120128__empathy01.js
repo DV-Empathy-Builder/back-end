@@ -69,7 +69,7 @@ exports.up = function(knex) {
 exports.down = function(knex) {
     return knex.schema
         .dropTableIfExists('stored_budget_lines')
-        .dropTableIfExists('users')
         .dropTableIfExists('categories')
-        .dropTableIfExists('budget_names');
+        .dropTableIfExists('budget_names')
+        .dropTableIfExists('users');
 };

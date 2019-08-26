@@ -11,6 +11,7 @@ exports.up = function(knex) {
         .createTable('categories', categories => {
             categories.increments('category_id');
             categories.string('category_name').notNullable();
+            categories.string('category_type').notNullable();
             categories
                 .integer('user_id')
                 .unsigned()

@@ -1,3 +1,5 @@
+const list = require('badwords-list')
+
 const Categories = require('./categoriesModel');
 
 module.exports = {
@@ -8,6 +10,8 @@ module.exports = {
 
 async function validCategoryData(req, res, next) {
     const category = req.body;
+    if(list.array.includes(category.category_name))
+        next({stat: 400, message: 'Please use appropriate language.'})
     if (!category.category_name)
         next({ stat: 400, message: 'Please include a category_name.' });
     else next();

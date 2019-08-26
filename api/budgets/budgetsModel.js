@@ -36,7 +36,7 @@ function findById(id) {
 
 function addBudget(budget) {
     return db('budget_names')
-        .insert(budget)
+        .insert(budget, "budget_name_id")
         .then(([id]) => findById(id));
 }
 

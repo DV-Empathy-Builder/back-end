@@ -25,7 +25,7 @@ function findByName(name){
 
 function insert(category) {
     return db('categories')
-        .insert(category)
+        .insert(category, "category_id")
         .then(([id]) => findById(id));
 }
 

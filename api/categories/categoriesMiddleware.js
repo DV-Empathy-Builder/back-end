@@ -1,17 +1,17 @@
-const list = require('badwords-list')
+const list = require('badwords-list');
 
 const Categories = require('./categoriesModel');
 
 module.exports = {
     validCategoryData,
     validCategoryID,
-    validateOwnerID
+    validateOwnerID,
 };
 
 async function validCategoryData(req, res, next) {
     const category = req.body;
-    if(list.array.includes(category.category_name))
-        next({stat: 400, message: 'Please use appropriate language.'})
+    if (list.array.includes(category.category_name))
+        next({ stat: 400, message: 'Please use appropriate language.' });
     if (!category.category_name)
         next({ stat: 400, message: 'Please include a category_name.' });
     else next();
@@ -30,12 +30,10 @@ async function validCategoryID(req, res, next) {
     else next({ stat: 400, message: 'Invalid category ID.' });
 }
 
-async function validateOwnerID(req, res, next){
+async function validateOwnerID(req, res, next) {
     const userID = req.token.subject;
-    const id = req.params.id;
-    const category = await Categories.findById(id)
-    if(category.user_id === userID)
-        next()
-    else    
-        next({stat:400, message: 'You can not edit this category.'})
+    const { id } = req.params;
+    const category = await Categories.findById(id);
+    if (category.user_id === userID) next();
+    else next({ stat: 400, message: 'You can not edit this category.' });
 }

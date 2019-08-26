@@ -2,10 +2,13 @@ const router = require('express').Router();
 
 const Budgets = require('./budgetsModel');
 
-//const {validBudgetID, validBudgetName} = require('./budgetsMiddleware');
+const {
+    validBudgetID,
+    validBudgetName,
+    validOwnerID,
+} = require('./budgetsMiddleware');
 
-
-//router.use('/:id, validBudgetID)
+router.use('/:id', validBudgetID, validOwnerID);
 
 router.get('/', async (req, res, next) => {
     try {
@@ -28,7 +31,7 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', validBudgetName, async (req, res, next) => {
     try {
         const budget_name = req.body.budget_name;
         const user_id = req.token.subject;
@@ -67,7 +70,7 @@ router.delete('/:id', async (req, res, next) => {
     }
 });
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', validBudgetName, async (req, res, next) => {
     try {
         const budget_name = req.body.budget_name;
         const user_id = req.token.subject;

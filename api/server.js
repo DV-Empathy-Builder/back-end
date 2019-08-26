@@ -19,7 +19,7 @@ server.use(bodyParser.urlencoded({ extended: true }));
 
 server.use('/auth', authRouter);
 server.use('/categories', restriction, categoriesRouter);
-server.use('/budgets', budgetsRouter);
+server.use('/budgets', restriction, budgetsRouter);
 
 server.use('/', express.static(apiDoc));
 

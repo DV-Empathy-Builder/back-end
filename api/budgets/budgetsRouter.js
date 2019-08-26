@@ -2,11 +2,10 @@ const router = require('express').Router();
 
 const Budgets = require('./budgetsModel');
 
-//const {validUserID, validBudgetID} = require('./budgetsMiddleware');
+//const {validBudgetID, validBudgetName} = require('./budgetsMiddleware');
 
-//router.use('/', validUserID)
 
-//router.use('/:id/savedBudgets/:budgetID, validBudgetID)
+//router.use('/:id, validBudgetID)
 
 router.get('/', async (req, res, next) => {
     try {

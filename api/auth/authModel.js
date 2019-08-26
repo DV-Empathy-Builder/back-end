@@ -14,5 +14,6 @@ function findById(id){
 }
 
 function findByUsername(username){
+    console.log(username)
     return db('users').where({username}).first()
 }

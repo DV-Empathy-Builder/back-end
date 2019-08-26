@@ -42,11 +42,7 @@ router.post(
             const newUser = await Users.insert(user);
             res.status(201).json({user_id: newUser.user_id, username: newUser.username});
         } catch (err) {
-            next({
-                err,
-                stat: 500,
-                message: 'Error occurred during registration.',
-            });
+            res.status(500).json({messag:'I hate heroku' });
         }
     }
 );

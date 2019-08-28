@@ -17,34 +17,34 @@ router.use('/:id', validCategoryID, validateOwnerID);
  * {
  *    "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6InRlc3QxIiwiaWF0IjoxNTY3MDE4OTcxLCJleHAiOjE1NjcwMzMzNzF9.75Q_EUManFaIczoccxkSC9LgFRm-zC5w3eeAHuhIWsg"
  *}
- * @apiSuccess (200) {Object[]} categories Array of categories; both default and user created
- *@apiSuccess (200) {Number} category_id ID of category
- *@apiSuccess (200) {String} category_name Name of category
- *@apiSuccess (200) {String} category_type Either personal or relocation
- *@apiSuccess (200) {Number} user_id Either ID of the user or null for default categories
+ * @apiSuccess (200) {Object} category Array of category objects
+ *@apiSuccess (200) {Number} category.category_id ID of category
+ *@apiSuccess (200) {String} category.category_name Name of category
+ *@apiSuccess (200) {String} category.category_type Either personal or relocation
+ *@apiSuccess (200) {Number} category.user_id Either ID of the user or null for default categories
  *
  * @apiSuccessExample {json} Success-Response:
  *      HTTP 200 OK
  *      [
- *   {
- *      "category_id": 1,
- *     "category_name": "Car Payment",
- *    "category_type": "Personal",
- *       "user_id": null
- *   },
- *   {
- *       "category_id": 2,
- *       "category_name": "Car Insurance",
- *       "category_type": "Personal",
- *      "user_id": null
- *   },
- *   {
- *       "category_id": 3,
- *       "category_name": "Gas & Car Maintenance",
- *       "category_type": "Personal",
- *       "user_id": null
- *   }
- * ]
+*           {
+*               "category_id": 1,
+*               "category_name": "Car Payment",
+*               "category_type": "Personal",
+*               "user_id": null
+*           },
+ *          {
+ *              "category_id": 2,
+ *              "category_name": "Car Insurance",
+ *              "category_type": "Personal",
+ *              "user_id": null
+ *          },
+ *          {
+ *              "category_id": 3,
+ *              "category_name": "Gas & Car Maintenance",
+ *              "category_type": "Personal",
+ *              "user_id": null
+ *          }
+ *      ]
  *
  * @apiError (400) MissingToken Must include token with this request.
  * @apiError (401) InvalidToken Must include a valid token.
@@ -81,20 +81,19 @@ router.get('/', async (req, res, next) => {
  *    "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6InRlc3QxIiwiaWF0IjoxNTY3MDE4OTcxLCJleHAiOjE1NjcwMzMzNzF9.75Q_EUManFaIczoccxkSC9LgFRm-zC5w3eeAHuhIWsg"
  *}
  * @apiSuccess (201) {Object} category Returns the created object
- *@apiSuccess (201) {Number} category_id Id of category
- *@apiSuccess (201) {String} category_name Name of category
- *@apiSuccess (201) {String} category_type Either personal or relocation
- *@apiSuccess (201) {Number} user_id Unique ID of user.
+ *@apiSuccess (201) {Number} category.category_id Id of category
+ *@apiSuccess (201) {String} category.category_name Name of category
+ *@apiSuccess (201) {String} category.category_type Either personal or relocation
+ *@apiSuccess (201) {Number} category.user_id Unique ID of user.
  *
  * @apiSuccessExample {json} Success-Response:
  *      HTTP 201 Created
- *  
- *   {
- *   "category_id": 24,
- *   "category_name": "Test234",
- *   "category_type": "Personal",
- *   "user_id": 1
-*}
+ *      {
+ *          "category_id": 24,
+ *          "category_name": "Test234",
+ *          "category_type": "Personal",
+ *          "user_id": 1
+*       }
  *
  * @apiError (400) MissingToken Must include token with this request.
  * @apiError (401) InvalidToken Must include a valid token.
@@ -136,34 +135,34 @@ router.post('/', validCategoryData, async (req, res, next) => {
  * {
  *    "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6InRlc3QxIiwiaWF0IjoxNTY3MDE4OTcxLCJleHAiOjE1NjcwMzMzNzF9.75Q_EUManFaIczoccxkSC9LgFRm-zC5w3eeAHuhIWsg"
  *}
- * @apiSuccess (200) {Object[]} categories Array of categories; both default and user created
- *@apiSuccess (200) {Number} category_id ID of category
- *@apiSuccess (200) {String} category_name Name of category
- *@apiSuccess (200) {String} category_type Either personal or relocation
- *@apiSuccess (200) {Number} user_id Either ID of the user or null for default categories
+* @apiSuccess (200) {Object} category Array of category objects
+ *@apiSuccess (200) {Number} category.category_id ID of category
+ *@apiSuccess (200) {String} category.category_name Name of category
+ *@apiSuccess (200) {String} category.category_type Either personal or relocation
+ *@apiSuccess (200) {Number} category.user_id Either ID of the user or null for default categories
  *
  * @apiSuccessExample {json} Success-Response:
  *      HTTP 200 OK
  *      [
- *   {
- *      "category_id": 1,
- *     "category_name": "Car Payment",
- *    "category_type": "Personal",
- *       "user_id": null
- *   },
- *   {
- *       "category_id": 2,
- *       "category_name": "Car Insurance",
- *       "category_type": "Personal",
- *      "user_id": null
- *   },
- *   {
- *       "category_id": 3,
- *       "category_name": "Gas & Car Maintenance",
- *       "category_type": "Personal",
- *       "user_id": null
- *   }
- * ]
+*           {
+*               "category_id": 1,
+*               "category_name": "Car Payment",
+*               "category_type": "Personal",
+*               "user_id": null
+*           },
+ *          {
+ *              "category_id": 2,
+ *              "category_name": "Car Insurance",
+ *              "category_type": "Personal",
+ *              "user_id": null
+ *          },
+ *          {
+ *              "category_id": 3,
+ *              "category_name": "Gas & Car Maintenance",
+ *              "category_type": "Personal",
+ *              "user_id": null
+ *          }
+ *      ]
  *
  * @apiError (400) MissingToken Must include token with this request.
  * @apiError (401) InvalidToken Must include a valid token.
@@ -200,34 +199,34 @@ router.put('/:id', validCategoryData, async (req, res, next) => {
  * {
  *    "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6InRlc3QxIiwiaWF0IjoxNTY3MDE4OTcxLCJleHAiOjE1NjcwMzMzNzF9.75Q_EUManFaIczoccxkSC9LgFRm-zC5w3eeAHuhIWsg"
  *}
- * @apiSuccess (200) {Object[]} categories Array of categories; both default and user created
- *@apiSuccess (200) {Number} category_id ID of category
- *@apiSuccess (200) {String} category_name Name of category
- *@apiSuccess (200) {String} category_type Either personal or relocation
- *@apiSuccess (200) {Number} user_id Either ID of the user or null for default categories
+* @apiSuccess (200) {Object[]} category Array of category objects
+ *@apiSuccess (200) {Number} category.category_id ID of category
+ *@apiSuccess (200) {String} category.category_name Name of category
+ *@apiSuccess (200) {String} category.category_type Either personal or relocation
+ *@apiSuccess (200) {Number} category.user_id Either ID of the user or null for default categories
  *
  * @apiSuccessExample {json} Success-Response:
  *      HTTP 200 OK
  *      [
- *   {
- *      "category_id": 1,
- *     "category_name": "Car Payment",
- *    "category_type": "Personal",
- *       "user_id": null
- *   },
- *   {
- *       "category_id": 2,
- *       "category_name": "Car Insurance",
- *       "category_type": "Personal",
- *      "user_id": null
- *   },
- *   {
- *       "category_id": 3,
- *       "category_name": "Gas & Car Maintenance",
- *       "category_type": "Personal",
- *       "user_id": null
- *   }
- * ]
+*           {
+*               "category_id": 1,
+*               "category_name": "Car Payment",
+*               "category_type": "Personal",
+*               "user_id": null
+*           },
+ *          {
+ *              "category_id": 2,
+ *              "category_name": "Car Insurance",
+ *              "category_type": "Personal",
+ *              "user_id": null
+ *          },
+ *          {
+ *              "category_id": 3,
+ *              "category_name": "Gas & Car Maintenance",
+ *              "category_type": "Personal",
+ *              "user_id": null
+ *          }
+ *      ]
  *
  * @apiError (400) MissingToken Must include token with this request.
  * @apiError (401) InvalidToken Must include a valid token.

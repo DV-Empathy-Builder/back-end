@@ -249,35 +249,35 @@ define({ "api": [
             "group": "200",
             "type": "Object[]",
             "optional": false,
-            "field": "categories",
-            "description": "<p>Array of categories; both default and user created</p>"
+            "field": "category",
+            "description": "<p>Array of category objects</p>"
           },
           {
             "group": "200",
             "type": "Number",
             "optional": false,
-            "field": "category_id",
+            "field": "category.category_id",
             "description": "<p>ID of category</p>"
           },
           {
             "group": "200",
             "type": "String",
             "optional": false,
-            "field": "category_name",
+            "field": "category.category_name",
             "description": "<p>Name of category</p>"
           },
           {
             "group": "200",
             "type": "String",
             "optional": false,
-            "field": "category_type",
+            "field": "category.category_type",
             "description": "<p>Either personal or relocation</p>"
           },
           {
             "group": "200",
             "type": "Number",
             "optional": false,
-            "field": "user_id",
+            "field": "category.user_id",
             "description": "<p>Either ID of the user or null for default categories</p>"
           }
         ]
@@ -285,7 +285,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "     HTTP 200 OK\n     [\n  {\n     \"category_id\": 1,\n    \"category_name\": \"Car Payment\",\n   \"category_type\": \"Personal\",\n      \"user_id\": null\n  },\n  {\n      \"category_id\": 2,\n      \"category_name\": \"Car Insurance\",\n      \"category_type\": \"Personal\",\n     \"user_id\": null\n  },\n  {\n      \"category_id\": 3,\n      \"category_name\": \"Gas & Car Maintenance\",\n      \"category_type\": \"Personal\",\n      \"user_id\": null\n  }\n]",
+          "content": "HTTP 200 OK\n[\n     {\n         \"category_id\": 1,\n         \"category_name\": \"Car Payment\",\n         \"category_type\": \"Personal\",\n         \"user_id\": null\n     },\n    {\n        \"category_id\": 2,\n        \"category_name\": \"Car Insurance\",\n        \"category_type\": \"Personal\",\n        \"user_id\": null\n    },\n    {\n        \"category_id\": 3,\n        \"category_name\": \"Gas & Car Maintenance\",\n        \"category_type\": \"Personal\",\n        \"user_id\": null\n    }\n]",
           "type": "json"
         }
       ]
@@ -357,37 +357,37 @@ define({ "api": [
         "200": [
           {
             "group": "200",
-            "type": "Object[]",
+            "type": "Object",
             "optional": false,
-            "field": "categories",
-            "description": "<p>Array of categories; both default and user created</p>"
+            "field": "category",
+            "description": "<p>Array of category objects</p>"
           },
           {
             "group": "200",
             "type": "Number",
             "optional": false,
-            "field": "category_id",
+            "field": "category.category_id",
             "description": "<p>ID of category</p>"
           },
           {
             "group": "200",
             "type": "String",
             "optional": false,
-            "field": "category_name",
+            "field": "category.category_name",
             "description": "<p>Name of category</p>"
           },
           {
             "group": "200",
             "type": "String",
             "optional": false,
-            "field": "category_type",
+            "field": "category.category_type",
             "description": "<p>Either personal or relocation</p>"
           },
           {
             "group": "200",
             "type": "Number",
             "optional": false,
-            "field": "user_id",
+            "field": "category.user_id",
             "description": "<p>Either ID of the user or null for default categories</p>"
           }
         ]
@@ -395,7 +395,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "     HTTP 200 OK\n     [\n  {\n     \"category_id\": 1,\n    \"category_name\": \"Car Payment\",\n   \"category_type\": \"Personal\",\n      \"user_id\": null\n  },\n  {\n      \"category_id\": 2,\n      \"category_name\": \"Car Insurance\",\n      \"category_type\": \"Personal\",\n     \"user_id\": null\n  },\n  {\n      \"category_id\": 3,\n      \"category_name\": \"Gas & Car Maintenance\",\n      \"category_type\": \"Personal\",\n      \"user_id\": null\n  }\n]",
+          "content": "HTTP 200 OK\n[\n     {\n         \"category_id\": 1,\n         \"category_name\": \"Car Payment\",\n         \"category_type\": \"Personal\",\n         \"user_id\": null\n     },\n    {\n        \"category_id\": 2,\n        \"category_name\": \"Car Insurance\",\n        \"category_type\": \"Personal\",\n        \"user_id\": null\n    },\n    {\n        \"category_id\": 3,\n        \"category_name\": \"Gas & Car Maintenance\",\n        \"category_type\": \"Personal\",\n        \"user_id\": null\n    }\n]",
           "type": "json"
         }
       ]
@@ -503,28 +503,28 @@ define({ "api": [
             "group": "201",
             "type": "Number",
             "optional": false,
-            "field": "category_id",
+            "field": "category.category_id",
             "description": "<p>Id of category</p>"
           },
           {
             "group": "201",
             "type": "String",
             "optional": false,
-            "field": "category_name",
+            "field": "category.category_name",
             "description": "<p>Name of category</p>"
           },
           {
             "group": "201",
             "type": "String",
             "optional": false,
-            "field": "category_type",
+            "field": "category.category_type",
             "description": "<p>Either personal or relocation</p>"
           },
           {
             "group": "201",
             "type": "Number",
             "optional": false,
-            "field": "user_id",
+            "field": "category.user_id",
             "description": "<p>Unique ID of user.</p>"
           }
         ]
@@ -532,7 +532,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "     HTTP 201 Created\n \n  {\n  \"category_id\": 24,\n  \"category_name\": \"Test234\",\n  \"category_type\": \"Personal\",\n  \"user_id\": 1\n}",
+          "content": "HTTP 201 Created\n{\n    \"category_id\": 24,\n    \"category_name\": \"Test234\",\n    \"category_type\": \"Personal\",\n    \"user_id\": 1\n }",
           "type": "json"
         }
       ]
@@ -638,37 +638,37 @@ define({ "api": [
         "200": [
           {
             "group": "200",
-            "type": "Object[]",
+            "type": "Object",
             "optional": false,
-            "field": "categories",
-            "description": "<p>Array of categories; both default and user created</p>"
+            "field": "category",
+            "description": "<p>Array of category objects</p>"
           },
           {
             "group": "200",
             "type": "Number",
             "optional": false,
-            "field": "category_id",
+            "field": "category.category_id",
             "description": "<p>ID of category</p>"
           },
           {
             "group": "200",
             "type": "String",
             "optional": false,
-            "field": "category_name",
+            "field": "category.category_name",
             "description": "<p>Name of category</p>"
           },
           {
             "group": "200",
             "type": "String",
             "optional": false,
-            "field": "category_type",
+            "field": "category.category_type",
             "description": "<p>Either personal or relocation</p>"
           },
           {
             "group": "200",
             "type": "Number",
             "optional": false,
-            "field": "user_id",
+            "field": "category.user_id",
             "description": "<p>Either ID of the user or null for default categories</p>"
           }
         ]
@@ -676,7 +676,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "     HTTP 200 OK\n     [\n  {\n     \"category_id\": 1,\n    \"category_name\": \"Car Payment\",\n   \"category_type\": \"Personal\",\n      \"user_id\": null\n  },\n  {\n      \"category_id\": 2,\n      \"category_name\": \"Car Insurance\",\n      \"category_type\": \"Personal\",\n     \"user_id\": null\n  },\n  {\n      \"category_id\": 3,\n      \"category_name\": \"Gas & Car Maintenance\",\n      \"category_type\": \"Personal\",\n      \"user_id\": null\n  }\n]",
+          "content": "HTTP 200 OK\n[\n     {\n         \"category_id\": 1,\n         \"category_name\": \"Car Payment\",\n         \"category_type\": \"Personal\",\n         \"user_id\": null\n     },\n    {\n        \"category_id\": 2,\n        \"category_name\": \"Car Insurance\",\n        \"category_type\": \"Personal\",\n        \"user_id\": null\n    },\n    {\n        \"category_id\": 3,\n        \"category_name\": \"Gas & Car Maintenance\",\n        \"category_type\": \"Personal\",\n        \"user_id\": null\n    }\n]",
           "type": "json"
         }
       ]

@@ -112,26 +112,26 @@ HTTP 400 MissingData
 Success-Response:
 
 ```
-     HTTP 200 OK
-     [
-  {
-     "category_id": 1,
-    "category_name": "Car Payment",
-   "category_type": "Personal",
-      "user_id": null
-  },
-  {
-      "category_id": 2,
-      "category_name": "Car Insurance",
-      "category_type": "Personal",
-     "user_id": null
-  },
-  {
-      "category_id": 3,
-      "category_name": "Gas & Car Maintenance",
-      "category_type": "Personal",
-      "user_id": null
-  }
+HTTP 200 OK
+[
+     {
+         "category_id": 1,
+         "category_name": "Car Payment",
+         "category_type": "Personal",
+         "user_id": null
+     },
+    {
+        "category_id": 2,
+        "category_name": "Car Insurance",
+        "category_type": "Personal",
+        "user_id": null
+    },
+    {
+        "category_id": 3,
+        "category_name": "Gas & Car Maintenance",
+        "category_type": "Personal",
+        "user_id": null
+    }
 ]
 ```
 ### Error Response
@@ -161,26 +161,26 @@ HTTP 400 MissingToken
 Success-Response:
 
 ```
-     HTTP 200 OK
-     [
-  {
-     "category_id": 1,
-    "category_name": "Car Payment",
-   "category_type": "Personal",
-      "user_id": null
-  },
-  {
-      "category_id": 2,
-      "category_name": "Car Insurance",
-      "category_type": "Personal",
-     "user_id": null
-  },
-  {
-      "category_id": 3,
-      "category_name": "Gas & Car Maintenance",
-      "category_type": "Personal",
-      "user_id": null
-  }
+HTTP 200 OK
+[
+     {
+         "category_id": 1,
+         "category_name": "Car Payment",
+         "category_type": "Personal",
+         "user_id": null
+     },
+    {
+        "category_id": 2,
+        "category_name": "Car Insurance",
+        "category_type": "Personal",
+        "user_id": null
+    },
+    {
+        "category_id": 3,
+        "category_name": "Gas & Car Maintenance",
+        "category_type": "Personal",
+        "user_id": null
+    }
 ]
 ```
 ### Error Response
@@ -217,14 +217,13 @@ HTTP 400 MissingToken
 Success-Response:
 
 ```
-     HTTP 201 Created
- 
-  {
-  "category_id": 24,
-  "category_name": "Test234",
-  "category_type": "Personal",
-  "user_id": 1
-}
+HTTP 201 Created
+{
+    "category_id": 24,
+    "category_name": "Test234",
+    "category_type": "Personal",
+    "user_id": 1
+ }
 ```
 ### Error Response
 
@@ -261,26 +260,26 @@ HTTP 400 MissingToken
 Success-Response:
 
 ```
-     HTTP 200 OK
-     [
-  {
-     "category_id": 1,
-    "category_name": "Car Payment",
-   "category_type": "Personal",
-      "user_id": null
-  },
-  {
-      "category_id": 2,
-      "category_name": "Car Insurance",
-      "category_type": "Personal",
-     "user_id": null
-  },
-  {
-      "category_id": 3,
-      "category_name": "Gas & Car Maintenance",
-      "category_type": "Personal",
-      "user_id": null
-  }
+HTTP 200 OK
+[
+     {
+         "category_id": 1,
+         "category_name": "Car Payment",
+         "category_type": "Personal",
+         "user_id": null
+     },
+    {
+        "category_id": 2,
+        "category_name": "Car Insurance",
+        "category_type": "Personal",
+        "user_id": null
+    },
+    {
+        "category_id": 3,
+        "category_name": "Gas & Car Maintenance",
+        "category_type": "Personal",
+        "user_id": null
+    }
 ]
 ```
 ### Error Response

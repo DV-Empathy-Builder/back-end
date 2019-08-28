@@ -9,26 +9,35 @@ const Users = require('./authModel');
  * @api {post} auth/register Register New User
  * @apiName PostRegister
  * @apiGroup Auth
+ * @apiParam {String} username User's unique username
+ * @apiParam {String} password User's password
+ * @apiParamExample Parameters:
+ * {
+ * "username": "test1"
+ * "password": "1234"
+ * }
  * 
- * @apiSuccess {Object} newUser User's id and username.
+ * @apiSuccess 201 {Object} newUser User's id and username
+ * @apiSuccess 201 {String} user_id User's id
+ * @apiSuccess 201 {String} username User's username
  * 
- * @apiSuccessExample Success-Response:
+ * @apiSuccessExample {json} Success-Response:
  *      HTTP 201 Created
  *      {
  *          "user_id": 3,
  *          "username": "abc123"
  *      }
  * 
- * @apiError MissingData The username or password was not submitted.
- * @apiError TakenUsername  The username is already in use.
+ * @apiError 400 MissingData The username or password was not submitted.
+ * @apiError 400 TakenUsername  The username is already in use.
  * 
  * @apiErrorExample Error-Response
- *      HTTP 400 Bad Request
+ *      HTTP 400 MissingData
  *      {
  *          "error": "Please send both username and password."
  *      }
  * 
- * @apiSampleRequest url
+ * @apiSampleRequest 
  */
 router.post(
     '/register',

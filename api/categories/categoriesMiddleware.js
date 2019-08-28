@@ -13,7 +13,7 @@ async function validCategoryData(req, res, next) {
     if (list.array.includes(category.category_name))
         next({ stat: 400, message: 'Please use appropriate language.' });
     if (!category.category_name || !category.category_type)
-        next({ stat: 400, message: 'Please include a category_name.' });
+        next({ stat: 400, message: 'Please include a category_name and category_type.' });
     else next();
 }
 

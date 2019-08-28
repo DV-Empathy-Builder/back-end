@@ -14,8 +14,7 @@ router.get('/', async (req, res, next) => {
     try {
         const user_id = req.token.subject;
         const budgets = await Budgets.getByUserId(user_id);
-        let budgetsToReturn = budgets.length < 2 ? budgets[0] : budgets;
-        res.status(200).json(budgetsToReturn);
+        res.status(200).json(budgets);
     } catch (err) {
         next({ err, stat: 500, message: 'Error getting saved budgets.' });
     }
@@ -94,7 +93,7 @@ router.put('/:id/lines', async (req, res, next) => {
             let changedLine = changes.find(
                 line2 => line.category_id === line2.category_id
             );
-            if (line.amount !== changedLine.amount)
+            if (changedLine.amount && line.amount !== changedLine.amount)
                 await Budgets.updateLines({
                     amount: changedLine.amount,
                     line_id: line.line_id,

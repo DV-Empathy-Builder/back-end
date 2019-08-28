@@ -36,17 +36,12 @@ router.post(
     checkValidUsername,
     async (req, res, next) => {
         try {
-            console.log('inside try')
             const user = req.body;
-            console.log('got user', user)
             const hash = bcrypt.hashSync(user.password, 10);
             user.password = hash;
-            console.log('got password', hash)
             const newUser = await Users.insert(user);
-            console.log('did insert')
             res.status(201).json({user_id: newUser.user_id, username: newUser.username});
         } catch (err) {
-            console.log('inside catch')
             next({
                 err,
                 stat: 500,

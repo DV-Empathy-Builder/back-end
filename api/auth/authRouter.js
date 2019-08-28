@@ -37,7 +37,7 @@ const Users = require('./authModel');
  *          "error": "Please send both username and password."
  *      }
  * 
- * @apiSampleRequest 
+ * @apiSampleRequest url
  */
 router.post(
     '/register',

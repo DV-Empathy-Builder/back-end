@@ -13,8 +13,15 @@ API for the empathy builder calculator for freeform.org.
 
 
 
-	POST /auth/register
+	POST auth/register
 
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| username			| String			|  <p>User's unique username</p>							|
+| password			| String			|  <p>User's password</p>							|
 
 ### Success Response
 
@@ -32,7 +39,7 @@ HTTP 201 Created
 Error-Response
 
 ```
-HTTP 400 Bad Request
+HTTP 400 MissingData
 {
     "error": "Please send both username and password."
 }

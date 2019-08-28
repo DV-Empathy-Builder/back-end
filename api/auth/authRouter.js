@@ -17,9 +17,9 @@ const Users = require('./authModel');
  * "password": "1234"
  * }
  * 
- * @apiSuccess 201 {Object} newUser User's id and username
- * @apiSuccess 201 {String} user_id User's id
- * @apiSuccess 201 {String} username User's username
+ * @apiSuccess (201) {Object} newUser User's id and username
+ * @apiSuccess (201) {String} user_id User's id
+ * @apiSuccess (201) {String} username User's username
  * 
  * @apiSuccessExample {json} Success-Response:
  *      HTTP 201 Created
@@ -28,8 +28,8 @@ const Users = require('./authModel');
  *          "username": "abc123"
  *      }
  * 
- * @apiError 400 MissingData The username or password was not submitted.
- * @apiError 400 TakenUsername  The username is already in use.
+ * @apiError (400) MissingData The username or password was not submitted.
+ * @apiError (400) TakenUsername  The username is already in use.
  * 
  * @apiErrorExample Error-Response
  *      HTTP 400 MissingData

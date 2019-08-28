@@ -34,12 +34,27 @@ define({ "api": [
     },
     "success": {
       "fields": {
-        "Success 200": [
+        "201": [
           {
-            "group": "Success 200",
+            "group": "201",
+            "type": "Object",
             "optional": false,
-            "field": "201",
-            "description": "<p>{Object} newUser User's id and username</p>"
+            "field": "newUser",
+            "description": "<p>User's id and username</p>"
+          },
+          {
+            "group": "201",
+            "type": "String",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>User's id</p>"
+          },
+          {
+            "group": "201",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>User's username</p>"
           }
         ]
       },
@@ -53,12 +68,18 @@ define({ "api": [
     },
     "error": {
       "fields": {
-        "Error 4xx": [
+        "400": [
           {
-            "group": "Error 4xx",
+            "group": "400",
             "optional": false,
-            "field": "400",
-            "description": "<p>MissingData The username or password was not submitted.</p>"
+            "field": "MissingData",
+            "description": "<p>The username or password was not submitted.</p>"
+          },
+          {
+            "group": "400",
+            "optional": false,
+            "field": "TakenUsername",
+            "description": "<p>The username is already in use.</p>"
           }
         ]
       },

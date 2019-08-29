@@ -197,6 +197,776 @@ define({ "api": [
     ]
   },
   {
+    "type": "del",
+    "url": "budgets/:id",
+    "title": "Delete a budget",
+    "name": "DelBudgets",
+    "group": "Budgets",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>User's unique authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n   \"Authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6InRlc3QxIiwiaWF0IjoxNTY3MDE4OTcxLCJleHAiOjE1NjcwMzMzNzF9.75Q_EUManFaIczoccxkSC9LgFRm-zC5w3eeAHuhIWsg\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "budget",
+            "description": "<p>Array of budget objects</p>"
+          },
+          {
+            "group": "200",
+            "type": "Number",
+            "optional": false,
+            "field": "budget.budget_name_id",
+            "description": "<p>ID of budget</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "budget.created_at",
+            "description": "<p>Date budget was created</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "budget.updated_at",
+            "description": "<p>Date budget was updated</p>"
+          },
+          {
+            "group": "200",
+            "type": "Number",
+            "optional": false,
+            "field": "budget.user_id",
+            "description": "<p>ID of the user owning the budget</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "     HTTP 200 OK\n[\n   {\n       \"budget_name_id\": 1,\n       \"budget_name\": \"Denver\",\n       \"created_at\": \"2019-08-26T19:49:28.206Z\",\n       \"updated_at\": \"2019-08-26T19:49:28.206Z\",\n       \"user_id\": 1\n   }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "400": [
+          {
+            "group": "400",
+            "optional": false,
+            "field": "MissingToken",
+            "description": "<p>Must include token with this request.</p>"
+          }
+        ],
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "InvalidToken",
+            "description": "<p>Must include a valid token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response",
+          "content": "HTTP 400 MissingToken\n{\n    \"error\": \"No token provided. Please include a token in your authorization header.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "api/budgets/budgetsRouter.js",
+    "groupTitle": "Budgets",
+    "sampleRequest": [
+      {
+        "url": "https://dv-empathy.herokuapp.com/budgets/:id"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "budgets/:id",
+    "title": "Get all lines for specific budget",
+    "name": "GetBudgetLines",
+    "group": "Budgets",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>User's unique authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n   \"Authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6InRlc3QxIiwiaWF0IjoxNTY3MDE4OTcxLCJleHAiOjE1NjcwMzMzNzF9.75Q_EUManFaIczoccxkSC9LgFRm-zC5w3eeAHuhIWsg\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "budget",
+            "description": "<p>Array of line objects</p>"
+          },
+          {
+            "group": "200",
+            "type": "Number",
+            "optional": false,
+            "field": "budget.line_id",
+            "description": "<p>ID of line</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "budget.amount",
+            "description": "<p>Amount allocated for line</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "budget.category_id",
+            "description": "<p>ID of category line is connected to</p>"
+          },
+          {
+            "group": "200",
+            "type": "Number",
+            "optional": false,
+            "field": "budget.category_name",
+            "description": "<p>Name of category line is connected to</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "     HTTP 200 OK\n[\n   {\n       \"line_id\": 1,\n       \"amount\": 80,\n       \"category_id\": 1,\n       \"category_name\": \"Car Payment\"\n   },\n   {\n       \"line_id\": 4,\n       \"amount\": 0,\n       \"category_id\": 2,\n       \"category_name\": \"Car Insurance\"\n   },\n   {\n       \"line_id\": 7,\n       \"amount\": 0,\n       \"category_id\": 3,\n       \"category_name\": \"Gas & Car Maintenance\"\n   },\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "400": [
+          {
+            "group": "400",
+            "optional": false,
+            "field": "MissingToken",
+            "description": "<p>Must include token with this request.</p>"
+          }
+        ],
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "InvalidToken",
+            "description": "<p>Must include a valid token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response",
+          "content": "HTTP 400 MissingToken\n{\n    \"error\": \"No token provided. Please include a token in your authorization header.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "api/budgets/budgetsRouter.js",
+    "groupTitle": "Budgets",
+    "sampleRequest": [
+      {
+        "url": "https://dv-empathy.herokuapp.com/budgets/:id"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "budgets/",
+    "title": "Get all budgets",
+    "name": "GetBudgets",
+    "group": "Budgets",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>User's unique authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n   \"Authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6InRlc3QxIiwiaWF0IjoxNTY3MDE4OTcxLCJleHAiOjE1NjcwMzMzNzF9.75Q_EUManFaIczoccxkSC9LgFRm-zC5w3eeAHuhIWsg\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "budget",
+            "description": "<p>Array of budget objects</p>"
+          },
+          {
+            "group": "200",
+            "type": "Number",
+            "optional": false,
+            "field": "budget.budget_name_id",
+            "description": "<p>ID of budget</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "budget.created_at",
+            "description": "<p>Date budget was created</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "budget.updated_at",
+            "description": "<p>Date budget was updated</p>"
+          },
+          {
+            "group": "200",
+            "type": "Number",
+            "optional": false,
+            "field": "budget.user_id",
+            "description": "<p>ID of the user owning the budget</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "     HTTP 200 OK\n[\n   {\n       \"budget_name_id\": 1,\n       \"budget_name\": \"Denver\",\n       \"created_at\": \"2019-08-26T19:49:28.206Z\",\n       \"updated_at\": \"2019-08-26T19:49:28.206Z\",\n       \"user_id\": 1\n   }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "400": [
+          {
+            "group": "400",
+            "optional": false,
+            "field": "MissingToken",
+            "description": "<p>Must include token with this request.</p>"
+          }
+        ],
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "InvalidToken",
+            "description": "<p>Must include a valid token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response",
+          "content": "HTTP 400 MissingToken\n{\n    \"error\": \"No token provided. Please include a token in your authorization header.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "api/budgets/budgetsRouter.js",
+    "groupTitle": "Budgets",
+    "sampleRequest": [
+      {
+        "url": "https://dv-empathy.herokuapp.com/budgets/"
+      }
+    ]
+  },
+  {
+    "type": "post",
+    "url": "budgets/:id",
+    "title": "Create lines for specific budget",
+    "name": "PostBudgetLines",
+    "group": "Budgets",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>User's unique authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n   \"Authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6InRlc3QxIiwiaWF0IjoxNTY3MDE4OTcxLCJleHAiOjE1NjcwMzMzNzF9.75Q_EUManFaIczoccxkSC9LgFRm-zC5w3eeAHuhIWsg\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "budget",
+            "description": "<p>Array of line objects</p>"
+          },
+          {
+            "group": "200",
+            "type": "Number",
+            "optional": false,
+            "field": "budget.line_id",
+            "description": "<p>ID of line</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "budget.amount",
+            "description": "<p>Amount allocated for line</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "budget.category_id",
+            "description": "<p>ID of category line is connected to</p>"
+          },
+          {
+            "group": "200",
+            "type": "Number",
+            "optional": false,
+            "field": "budget.category_name",
+            "description": "<p>Name of category line is connected to</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "     HTTP 200 OK\n[\n   {\n       \"line_id\": 1,\n       \"amount\": 80,\n       \"category_id\": 1,\n       \"category_name\": \"Car Payment\"\n   },\n   {\n       \"line_id\": 4,\n       \"amount\": 0,\n       \"category_id\": 2,\n       \"category_name\": \"Car Insurance\"\n   },\n   {\n       \"line_id\": 7,\n       \"amount\": 0,\n       \"category_id\": 3,\n       \"category_name\": \"Gas & Car Maintenance\"\n   },\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "400": [
+          {
+            "group": "400",
+            "optional": false,
+            "field": "MissingToken",
+            "description": "<p>Must include token with this request.</p>"
+          }
+        ],
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "InvalidToken",
+            "description": "<p>Must include a valid token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response",
+          "content": "HTTP 400 MissingToken\n{\n    \"error\": \"No token provided. Please include a token in your authorization header.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "api/budgets/budgetsRouter.js",
+    "groupTitle": "Budgets",
+    "sampleRequest": [
+      {
+        "url": "https://dv-empathy.herokuapp.com/budgets/:id"
+      }
+    ]
+  },
+  {
+    "type": "post",
+    "url": "budgets/",
+    "title": "Post new budget",
+    "name": "PostBudgets",
+    "group": "Budgets",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>User's unique authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n   \"Authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6InRlc3QxIiwiaWF0IjoxNTY3MDE4OTcxLCJleHAiOjE1NjcwMzMzNzF9.75Q_EUManFaIczoccxkSC9LgFRm-zC5w3eeAHuhIWsg\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Object",
+            "optional": false,
+            "field": "budget",
+            "description": "<p>Newly created budget object</p>"
+          },
+          {
+            "group": "200",
+            "type": "Number",
+            "optional": false,
+            "field": "budget.budget_name_id",
+            "description": "<p>ID of budget</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "budget.created_at",
+            "description": "<p>Date budget was created</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "budget.updated_at",
+            "description": "<p>Date budget was updated</p>"
+          },
+          {
+            "group": "200",
+            "type": "Number",
+            "optional": false,
+            "field": "budget.user_id",
+            "description": "<p>ID of the user owning the budget</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "  HTTP 200 OK\n\n{\n    \"budget_name_id\": 1,\n    \"budget_name\": \"Denver\",\n    \"created_at\": \"2019-08-26T19:49:28.206Z\",\n    \"updated_at\": \"2019-08-26T19:49:28.206Z\",\n    \"user_id\": 1\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "400": [
+          {
+            "group": "400",
+            "optional": false,
+            "field": "MissingToken",
+            "description": "<p>Must include token with this request.</p>"
+          }
+        ],
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "InvalidToken",
+            "description": "<p>Must include a valid token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response",
+          "content": "HTTP 400 MissingToken\n{\n    \"error\": \"No token provided. Please include a token in your authorization header.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "api/budgets/budgetsRouter.js",
+    "groupTitle": "Budgets",
+    "sampleRequest": [
+      {
+        "url": "https://dv-empathy.herokuapp.com/budgets/"
+      }
+    ]
+  },
+  {
+    "type": "put",
+    "url": "budgets/:id/lines",
+    "title": "Edit lines for specific budget",
+    "name": "PutBudgetLines",
+    "group": "Budgets",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>User's unique authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n   \"Authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6InRlc3QxIiwiaWF0IjoxNTY3MDE4OTcxLCJleHAiOjE1NjcwMzMzNzF9.75Q_EUManFaIczoccxkSC9LgFRm-zC5w3eeAHuhIWsg\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "budget",
+            "description": "<p>Array of line objects</p>"
+          },
+          {
+            "group": "200",
+            "type": "Number",
+            "optional": false,
+            "field": "budget.line_id",
+            "description": "<p>ID of line</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "budget.amount",
+            "description": "<p>Amount allocated for line</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "budget.category_id",
+            "description": "<p>ID of category line is connected to</p>"
+          },
+          {
+            "group": "200",
+            "type": "Number",
+            "optional": false,
+            "field": "budget.category_name",
+            "description": "<p>Name of category line is connected to</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "     HTTP 200 OK\n[\n   {\n       \"line_id\": 1,\n       \"amount\": 80,\n       \"category_id\": 1,\n       \"category_name\": \"Car Payment\"\n   },\n   {\n       \"line_id\": 4,\n       \"amount\": 0,\n       \"category_id\": 2,\n       \"category_name\": \"Car Insurance\"\n   },\n   {\n       \"line_id\": 7,\n       \"amount\": 0,\n       \"category_id\": 3,\n       \"category_name\": \"Gas & Car Maintenance\"\n   },\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "400": [
+          {
+            "group": "400",
+            "optional": false,
+            "field": "MissingToken",
+            "description": "<p>Must include token with this request.</p>"
+          }
+        ],
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "InvalidToken",
+            "description": "<p>Must include a valid token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response",
+          "content": "HTTP 400 MissingToken\n{\n    \"error\": \"No token provided. Please include a token in your authorization header.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "api/budgets/budgetsRouter.js",
+    "groupTitle": "Budgets",
+    "sampleRequest": [
+      {
+        "url": "https://dv-empathy.herokuapp.com/budgets/:id/lines"
+      }
+    ]
+  },
+  {
+    "type": "put",
+    "url": "budgets/:id",
+    "title": "Edit budget name",
+    "name": "PutBudgets",
+    "group": "Budgets",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>User's unique authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n   \"Authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6InRlc3QxIiwiaWF0IjoxNTY3MDE4OTcxLCJleHAiOjE1NjcwMzMzNzF9.75Q_EUManFaIczoccxkSC9LgFRm-zC5w3eeAHuhIWsg\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "budget",
+            "description": "<p>Array of budget objects</p>"
+          },
+          {
+            "group": "200",
+            "type": "Number",
+            "optional": false,
+            "field": "budget.budget_name_id",
+            "description": "<p>ID of budget</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "budget.created_at",
+            "description": "<p>Date budget was created</p>"
+          },
+          {
+            "group": "200",
+            "type": "Date",
+            "optional": false,
+            "field": "budget.updated_at",
+            "description": "<p>Date budget was updated</p>"
+          },
+          {
+            "group": "200",
+            "type": "Number",
+            "optional": false,
+            "field": "budget.user_id",
+            "description": "<p>ID of the user owning the budget</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "     HTTP 200 OK\n[\n   {\n       \"budget_name_id\": 1,\n       \"budget_name\": \"Denver\",\n       \"created_at\": \"2019-08-26T19:49:28.206Z\",\n       \"updated_at\": \"2019-08-26T19:49:28.206Z\",\n       \"user_id\": 1\n   }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "400": [
+          {
+            "group": "400",
+            "optional": false,
+            "field": "MissingToken",
+            "description": "<p>Must include token with this request.</p>"
+          }
+        ],
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "InvalidToken",
+            "description": "<p>Must include a valid token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response",
+          "content": "HTTP 400 MissingToken\n{\n    \"error\": \"No token provided. Please include a token in your authorization header.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "api/budgets/budgetsRouter.js",
+    "groupTitle": "Budgets",
+    "sampleRequest": [
+      {
+        "url": "https://dv-empathy.herokuapp.com/budgets/:id"
+      }
+    ]
+  },
+  {
     "type": "delete",
     "url": "categories/:id",
     "title": "Delete a specific category",
@@ -357,7 +1127,7 @@ define({ "api": [
         "200": [
           {
             "group": "200",
-            "type": "Object",
+            "type": "Object[]",
             "optional": false,
             "field": "category",
             "description": "<p>Array of category objects</p>"
@@ -638,7 +1408,7 @@ define({ "api": [
         "200": [
           {
             "group": "200",
-            "type": "Object",
+            "type": "Object[]",
             "optional": false,
             "field": "category",
             "description": "<p>Array of category objects</p>"

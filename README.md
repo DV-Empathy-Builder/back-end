@@ -6,6 +6,15 @@ API for the empathy builder calculator for freeform.org.
 	- [Login registered user](#login-registered-user)
 	- [Register new user](#register-new-user)
 	
+- [Budgets](#budgets)
+	- [Delete a budget](#delete-a-budget)
+	- [Get all lines for specific budget](#get-all-lines-for-specific-budget)
+	- [Get all budgets](#get-all-budgets)
+	- [Create lines for specific budget](#create-lines-for-specific-budget)
+	- [Post new budget](#post-new-budget)
+	- [Edit lines for specific budget](#edit-lines-for-specific-budget)
+	- [Edit budget name](#edit-budget-name)
+	
 - [Categories](#categories)
 	- [Delete a specific category](#delete-a-specific-category)
 	- [Get all categories](#get-all-categories)
@@ -85,6 +94,306 @@ Error-Response
 HTTP 400 MissingData
 {
     "error": "Please send both username and password."
+}
+```
+# Budgets
+
+## Delete a budget
+
+
+
+	DEL budgets/:id
+
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| authorization			| String			|  <p>User's unique authorization token</p>							|
+
+### Success Response
+
+Success-Response:
+
+```
+     HTTP 200 OK
+[
+   {
+       "budget_name_id": 1,
+       "budget_name": "Denver",
+       "created_at": "2019-08-26T19:49:28.206Z",
+       "updated_at": "2019-08-26T19:49:28.206Z",
+       "user_id": 1
+   }
+]
+```
+### Error Response
+
+Error-Response
+
+```
+HTTP 400 MissingToken
+{
+    "error": "No token provided. Please include a token in your authorization header."
+}
+```
+## Get all lines for specific budget
+
+
+
+	GET budgets/:id
+
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| authorization			| String			|  <p>User's unique authorization token</p>							|
+
+### Success Response
+
+Success-Response:
+
+```
+     HTTP 200 OK
+[
+   {
+       "line_id": 1,
+       "amount": 80,
+       "category_id": 1,
+       "category_name": "Car Payment"
+   },
+   {
+       "line_id": 4,
+       "amount": 0,
+       "category_id": 2,
+       "category_name": "Car Insurance"
+   },
+   {
+       "line_id": 7,
+       "amount": 0,
+       "category_id": 3,
+       "category_name": "Gas & Car Maintenance"
+   },
+]
+```
+### Error Response
+
+Error-Response
+
+```
+HTTP 400 MissingToken
+{
+    "error": "No token provided. Please include a token in your authorization header."
+}
+```
+## Get all budgets
+
+
+
+	GET budgets/
+
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| authorization			| String			|  <p>User's unique authorization token</p>							|
+
+### Success Response
+
+Success-Response:
+
+```
+     HTTP 200 OK
+[
+   {
+       "budget_name_id": 1,
+       "budget_name": "Denver",
+       "created_at": "2019-08-26T19:49:28.206Z",
+       "updated_at": "2019-08-26T19:49:28.206Z",
+       "user_id": 1
+   }
+]
+```
+### Error Response
+
+Error-Response
+
+```
+HTTP 400 MissingToken
+{
+    "error": "No token provided. Please include a token in your authorization header."
+}
+```
+## Create lines for specific budget
+
+
+
+	POST budgets/:id
+
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| authorization			| String			|  <p>User's unique authorization token</p>							|
+
+### Success Response
+
+Success-Response:
+
+```
+     HTTP 200 OK
+[
+   {
+       "line_id": 1,
+       "amount": 80,
+       "category_id": 1,
+       "category_name": "Car Payment"
+   },
+   {
+       "line_id": 4,
+       "amount": 0,
+       "category_id": 2,
+       "category_name": "Car Insurance"
+   },
+   {
+       "line_id": 7,
+       "amount": 0,
+       "category_id": 3,
+       "category_name": "Gas & Car Maintenance"
+   },
+]
+```
+### Error Response
+
+Error-Response
+
+```
+HTTP 400 MissingToken
+{
+    "error": "No token provided. Please include a token in your authorization header."
+}
+```
+## Post new budget
+
+
+
+	POST budgets/
+
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| authorization			| String			|  <p>User's unique authorization token</p>							|
+
+### Success Response
+
+Success-Response:
+
+```
+  HTTP 200 OK
+
+{
+    "budget_name_id": 1,
+    "budget_name": "Denver",
+    "created_at": "2019-08-26T19:49:28.206Z",
+    "updated_at": "2019-08-26T19:49:28.206Z",
+    "user_id": 1
+}
+```
+### Error Response
+
+Error-Response
+
+```
+HTTP 400 MissingToken
+{
+    "error": "No token provided. Please include a token in your authorization header."
+}
+```
+## Edit lines for specific budget
+
+
+
+	PUT budgets/:id/lines
+
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| authorization			| String			|  <p>User's unique authorization token</p>							|
+
+### Success Response
+
+Success-Response:
+
+```
+     HTTP 200 OK
+[
+   {
+       "line_id": 1,
+       "amount": 80,
+       "category_id": 1,
+       "category_name": "Car Payment"
+   },
+   {
+       "line_id": 4,
+       "amount": 0,
+       "category_id": 2,
+       "category_name": "Car Insurance"
+   },
+   {
+       "line_id": 7,
+       "amount": 0,
+       "category_id": 3,
+       "category_name": "Gas & Car Maintenance"
+   },
+]
+```
+### Error Response
+
+Error-Response
+
+```
+HTTP 400 MissingToken
+{
+    "error": "No token provided. Please include a token in your authorization header."
+}
+```
+## Edit budget name
+
+
+
+	PUT budgets/:id
+
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| authorization			| String			|  <p>User's unique authorization token</p>							|
+
+### Success Response
+
+Success-Response:
+
+```
+     HTTP 200 OK
+[
+   {
+       "budget_name_id": 1,
+       "budget_name": "Denver",
+       "created_at": "2019-08-26T19:49:28.206Z",
+       "updated_at": "2019-08-26T19:49:28.206Z",
+       "user_id": 1
+   }
+]
+```
+### Error Response
+
+Error-Response
+
+```
+HTTP 400 MissingToken
+{
+    "error": "No token provided. Please include a token in your authorization header."
 }
 ```
 # Categories

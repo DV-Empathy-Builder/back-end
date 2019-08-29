@@ -17,7 +17,7 @@ router.use('/:id', validCategoryID, validateOwnerID);
  * {
  *    "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6InRlc3QxIiwiaWF0IjoxNTY3MDE4OTcxLCJleHAiOjE1NjcwMzMzNzF9.75Q_EUManFaIczoccxkSC9LgFRm-zC5w3eeAHuhIWsg"
  *}
- * @apiSuccess (200) {Object} category Array of category objects
+ * @apiSuccess (200) {Object[]} category Array of category objects
  *@apiSuccess (200) {Number} category.category_id ID of category
  *@apiSuccess (200) {String} category.category_name Name of category
  *@apiSuccess (200) {String} category.category_type Either personal or relocation
@@ -135,7 +135,7 @@ router.post('/', validCategoryData, async (req, res, next) => {
  * {
  *    "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6InRlc3QxIiwiaWF0IjoxNTY3MDE4OTcxLCJleHAiOjE1NjcwMzMzNzF9.75Q_EUManFaIczoccxkSC9LgFRm-zC5w3eeAHuhIWsg"
  *}
-* @apiSuccess (200) {Object} category Array of category objects
+* @apiSuccess (200) {Object[]} category Array of category objects
  *@apiSuccess (200) {Number} category.category_id ID of category
  *@apiSuccess (200) {String} category.category_name Name of category
  *@apiSuccess (200) {String} category.category_type Either personal or relocation

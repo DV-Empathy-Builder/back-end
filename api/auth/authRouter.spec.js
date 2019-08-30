@@ -51,9 +51,13 @@ describe('auth router', () => {
         it('should return message and token on valid creds', async () => {
             const res = await request(server)
                 .post('/auth/login')
-                .send({ username: 'test1', password: '1234'});
-            expect(res.status).toBe(200);
-            expect(res.body).toEqual(
+                .send({ username: 'test1', password: '1234' })
+                .then(res => {
+                    token = res.body.token;
+                    response = res;
+                });
+            expect(response.status).toBe(200);
+            expect(response.body).toEqual(
                 expect.objectContaining({
                     message: `Welcome test1!`,
                     token: expect.any(String),

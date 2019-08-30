@@ -115,16 +115,17 @@ router.post('/login', checkValidUserData, async (req, res, next) => {
 });
 
 function generateToken(user) {
+    
     const payload = {
         subject: user.user_id,
         username: user.username,
     };
-
+    
     const options = {
         expiresIn: '4h',
     };
 
-    return jwt.sign(payload, process.env.JWT_SECRET, options);
+    return jwt.sign(payload, process.env.JWT_SECRET || 'testing', options);
 }
 
 module.exports = router;

@@ -2,6 +2,7 @@ const request = require('supertest');
 const db = require('../../data/dbConfig');
 const server = require('../server');
 const Users = require('../auth/authModel');
+const bcrypt = require('bcryptjs');
 
 describe('auth router', () => {
     beforeAll(() => {
@@ -23,7 +24,7 @@ describe('auth router', () => {
         it('should return the new User', done => {
             return request(server)
                 .post('/auth/register')
-                .send({ username: 'test1', password: '1234' })
+                .send({ username: 'test4', password: '1234' })
                 .expect('Content-Type', /json/)
                 .expect(201, done);
         });
@@ -50,7 +51,7 @@ describe('auth router', () => {
         it('should return message and token on valid creds', async () => {
             const res = await request(server)
                 .post('/auth/login')
-                .send({ username: 'test1', password: '1234' });
+                .send({ username: 'test1', password: '1234'});
             expect(res.status).toBe(200);
             expect(res.body).toEqual(
                 expect.objectContaining({

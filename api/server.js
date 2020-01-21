@@ -23,10 +23,6 @@ server.use('/budgets', restriction, budgetsRouter);
 
 server.use('/', express.static(apiDoc));
 
-server.use('/:anything', (req, res) => {
-    res.status(404).json("This page does not exist.")
-})
-
 server.use(errorHandler);
 
 function errorHandler(error, req, res, next) {
@@ -35,5 +31,9 @@ function errorHandler(error, req, res, next) {
         error: error.message || 'Internal server error.',
     });
 }
+
+server.use('/:anything', (req, res) => {
+    res.status(404).json('This page does not exist.');
+});
 
 module.exports = server;

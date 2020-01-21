@@ -26,15 +26,15 @@ router.use('/:id', validBudgetID, validateOwnerID);
  *
  * @apiSuccessExample {json} Success-Response:
  *      HTTP 200 OK
-*[
-*    {
-*        "budget_name_id": 1,
-*        "budget_name": "Denver",
-*        "created_at": "2019-08-26T19:49:28.206Z",
-*        "updated_at": "2019-08-26T19:49:28.206Z",
-*        "user_id": 1
-*    }
-*]
+ *[
+ *    {
+ *        "budget_name_id": 1,
+ *        "budget_name": "Denver",
+ *        "created_at": "2019-08-26T19:49:28.206Z",
+ *        "updated_at": "2019-08-26T19:49:28.206Z",
+ *        "user_id": 1
+ *    }
+ *]
  *
  * @apiError (400) MissingToken Must include token with this request.
  * @apiError (401) InvalidToken Must include a valid token.
@@ -71,26 +71,26 @@ router.get('/', async (req, res, next) => {
  *
  * @apiSuccessExample {json} Success-Response:
  *      HTTP 200 OK
-*[
-*    {
-*        "line_id": 1,
-*        "amount": 80,
-*        "category_id": 1,
-*        "category_name": "Car Payment"
-*    },
-*    {
-*        "line_id": 4,
-*        "amount": 0,
-*        "category_id": 2,
-*        "category_name": "Car Insurance"
-*    },
-*    {
-*        "line_id": 7,
-*        "amount": 0,
-*        "category_id": 3,
-*        "category_name": "Gas & Car Maintenance"
-*    },
-*]
+ *[
+ *    {
+ *        "line_id": 1,
+ *        "amount": 80,
+ *        "category_id": 1,
+ *        "category_name": "Car Payment"
+ *    },
+ *    {
+ *        "line_id": 4,
+ *        "amount": 0,
+ *        "category_id": 2,
+ *        "category_name": "Car Insurance"
+ *    },
+ *    {
+ *        "line_id": 7,
+ *        "amount": 0,
+ *        "category_id": 3,
+ *        "category_name": "Gas & Car Maintenance"
+ *    },
+ *]
  *
  * @apiError (400) MissingToken Must include token with this request.
  * @apiError (401) InvalidToken Must include a valid token.
@@ -127,15 +127,15 @@ router.get('/:id', async (req, res, next) => {
  *
  * @apiSuccessExample {json} Success-Response:
  *      HTTP 200 OK
-*
-*    {
-*        "budget_name_id": 1,
-*        "budget_name": "Denver",
-*        "created_at": "2019-08-26T19:49:28.206Z",
-*        "updated_at": "2019-08-26T19:49:28.206Z",
-*        "user_id": 1
-*    }
-*
+ *
+ *    {
+ *        "budget_name_id": 1,
+ *        "budget_name": "Denver",
+ *        "created_at": "2019-08-26T19:49:28.206Z",
+ *        "updated_at": "2019-08-26T19:49:28.206Z",
+ *        "user_id": 1
+ *    }
+ *
  *
  * @apiError (400) MissingToken Must include token with this request.
  * @apiError (401) InvalidToken Must include a valid token.
@@ -174,26 +174,26 @@ router.post('/', validBudgetName, async (req, res, next) => {
  *
  * @apiSuccessExample {json} Success-Response:
  *      HTTP 200 OK
-*[
-*    {
-*        "line_id": 1,
-*        "amount": 80,
-*        "category_id": 1,
-*        "category_name": "Car Payment"
-*    },
-*    {
-*        "line_id": 4,
-*        "amount": 0,
-*        "category_id": 2,
-*        "category_name": "Car Insurance"
-*    },
-*    {
-*        "line_id": 7,
-*        "amount": 0,
-*        "category_id": 3,
-*        "category_name": "Gas & Car Maintenance"
-*    },
-*]
+ *[
+ *    {
+ *        "line_id": 1,
+ *        "amount": 80,
+ *        "category_id": 1,
+ *        "category_name": "Car Payment"
+ *    },
+ *    {
+ *        "line_id": 4,
+ *        "amount": 0,
+ *        "category_id": 2,
+ *        "category_name": "Car Insurance"
+ *    },
+ *    {
+ *        "line_id": 7,
+ *        "amount": 0,
+ *        "category_id": 3,
+ *        "category_name": "Gas & Car Maintenance"
+ *    },
+ *]
  *
  * @apiError (400) MissingToken Must include token with this request.
  * @apiError (401) InvalidToken Must include a valid token.
@@ -236,15 +236,15 @@ router.post('/:id', async (req, res, next) => {
  *
  * @apiSuccessExample {json} Success-Response:
  *      HTTP 200 OK
-*[
-*    {
-*        "budget_name_id": 1,
-*        "budget_name": "Denver",
-*        "created_at": "2019-08-26T19:49:28.206Z",
-*        "updated_at": "2019-08-26T19:49:28.206Z",
-*        "user_id": 1
-*    }
-*]
+ *[
+ *    {
+ *        "budget_name_id": 1,
+ *        "budget_name": "Denver",
+ *        "created_at": "2019-08-26T19:49:28.206Z",
+ *        "updated_at": "2019-08-26T19:49:28.206Z",
+ *        "user_id": 1
+ *    }
+ *]
  *
  * @apiError (400) MissingToken Must include token with this request.
  * @apiError (401) InvalidToken Must include a valid token.
@@ -282,15 +282,15 @@ router.delete('/:id', async (req, res, next) => {
  *
  * @apiSuccessExample {json} Success-Response:
  *      HTTP 200 OK
-*[
-*    {
-*        "budget_name_id": 1,
-*        "budget_name": "Denver",
-*        "created_at": "2019-08-26T19:49:28.206Z",
-*        "updated_at": "2019-08-26T19:49:28.206Z",
-*        "user_id": 1
-*    }
-*]
+ *[
+ *    {
+ *        "budget_name_id": 1,
+ *        "budget_name": "Denver",
+ *        "created_at": "2019-08-26T19:49:28.206Z",
+ *        "updated_at": "2019-08-26T19:49:28.206Z",
+ *        "user_id": 1
+ *    }
+ *]
  *
  * @apiError (400) MissingToken Must include token with this request.
  * @apiError (401) InvalidToken Must include a valid token.
@@ -333,26 +333,26 @@ router.put('/:id', validBudgetName, async (req, res, next) => {
  *
  * @apiSuccessExample {json} Success-Response:
  *      HTTP 200 OK
-*[
-*    {
-*        "line_id": 1,
-*        "amount": 80,
-*        "category_id": 1,
-*        "category_name": "Car Payment"
-*    },
-*    {
-*        "line_id": 4,
-*        "amount": 0,
-*        "category_id": 2,
-*        "category_name": "Car Insurance"
-*    },
-*    {
-*        "line_id": 7,
-*        "amount": 0,
-*        "category_id": 3,
-*        "category_name": "Gas & Car Maintenance"
-*    },
-*]
+ *[
+ *    {
+ *        "line_id": 1,
+ *        "amount": 80,
+ *        "category_id": 1,
+ *        "category_name": "Car Payment"
+ *    },
+ *    {
+ *        "line_id": 4,
+ *        "amount": 0,
+ *        "category_id": 2,
+ *        "category_name": "Car Insurance"
+ *    },
+ *    {
+ *        "line_id": 7,
+ *        "amount": 0,
+ *        "category_id": 3,
+ *        "category_name": "Gas & Car Maintenance"
+ *    },
+ *]
  *
  * @apiError (400) MissingToken Must include token with this request.
  * @apiError (401) InvalidToken Must include a valid token.

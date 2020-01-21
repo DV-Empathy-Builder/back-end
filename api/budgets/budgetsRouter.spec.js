@@ -22,6 +22,7 @@ describe('budget router', () => {
         it('should properly get by user ID', async () => {
             const budgets = await Budgets.getByUserId(1);
             expect(budgets).toHaveLength(1);
+            
         });
 
         it('should return the budgets', done => {

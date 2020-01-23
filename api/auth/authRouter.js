@@ -115,12 +115,11 @@ router.post('/login', checkValidUserData, async (req, res, next) => {
 });
 
 function generateToken(user) {
-    
     const payload = {
-        subject: user.user_id,
+        sub: user.user_id,
         username: user.username,
     };
-    
+
     const options = {
         expiresIn: '4h',
     };

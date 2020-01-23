@@ -2,7 +2,6 @@ const request = require('supertest');
 const db = require('../../data/dbConfig');
 const server = require('../server');
 const Budgets = require('./budgetsModel');
-const bcrypt = require('bcryptjs');
 
 describe('budget router', () => {
     beforeAll(() => {
@@ -22,14 +21,12 @@ describe('budget router', () => {
         it('should properly get by user ID', async () => {
             const budgets = await Budgets.getByUserId(1);
             expect(budgets).toHaveLength(1);
-            
         });
 
         it('should return the budgets', done => {
             return request(server)
                 .get('/budgets')
                 .set('authorization', token)
-                .send({ username: 'test4', password: '1234' })
                 .expect('Content-Type', /json/)
                 .expect(200, done);
         });

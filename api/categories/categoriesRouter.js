@@ -8,6 +8,7 @@ const {
 } = require('./categoriesMiddleware');
 
 router.use('/:id', validCategoryID, validateOwnerID);
+
 /**
  * @api {get} categories/ Get all categories
  * @apiName GetCategories
@@ -26,12 +27,12 @@ router.use('/:id', validCategoryID, validateOwnerID);
  * @apiSuccessExample {json} Success-Response:
  *      HTTP 200 OK
  *      [
-*           {
-*               "category_id": 1,
-*               "category_name": "Car Payment",
-*               "category_type": "Personal",
-*               "user_id": null
-*           },
+ *           {
+ *               "category_id": 1,
+ *               "category_name": "Car Payment",
+ *               "category_type": "Personal",
+ *               "user_id": null
+ *           },
  *          {
  *              "category_id": 2,
  *              "category_name": "Car Insurance",
@@ -57,7 +58,7 @@ router.use('/:id', validCategoryID, validateOwnerID);
  */
 router.get('/', async (req, res, next) => {
     try {
-        const user_id = req.token.subject;
+        const user_id = req.token.sub;
         const categories = await Categories.getAll(user_id);
         res.status(200).json(categories);
     } catch (err) {
@@ -93,7 +94,7 @@ router.get('/', async (req, res, next) => {
  *          "category_name": "Test234",
  *          "category_type": "Personal",
  *          "user_id": 1
-*       }
+ *       }
  *
  * @apiError (400) MissingToken Must include token with this request.
  * @apiError (401) InvalidToken Must include a valid token.
@@ -110,7 +111,7 @@ router.post('/', validCategoryData, async (req, res, next) => {
         newCategory.category_name =
             newCategory.category_name[0].toUpperCase() +
             newCategory.category_name.slice(1);
-        newCategory.user_id = req.token.subject;
+        newCategory.user_id = req.token.sub;
         const category = await Categories.insert(newCategory);
         res.status(201).json(category);
     } catch (err) {
@@ -135,7 +136,7 @@ router.post('/', validCategoryData, async (req, res, next) => {
  * {
  *    "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6InRlc3QxIiwiaWF0IjoxNTY3MDE4OTcxLCJleHAiOjE1NjcwMzMzNzF9.75Q_EUManFaIczoccxkSC9LgFRm-zC5w3eeAHuhIWsg"
  *}
-* @apiSuccess (200) {Object[]} category Array of category objects
+ * @apiSuccess (200) {Object[]} category Array of category objects
  *@apiSuccess (200) {Number} category.category_id ID of category
  *@apiSuccess (200) {String} category.category_name Name of category
  *@apiSuccess (200) {String} category.category_type Either personal or relocation
@@ -144,12 +145,12 @@ router.post('/', validCategoryData, async (req, res, next) => {
  * @apiSuccessExample {json} Success-Response:
  *      HTTP 200 OK
  *      [
-*           {
-*               "category_id": 1,
-*               "category_name": "Car Payment",
-*               "category_type": "Personal",
-*               "user_id": null
-*           },
+ *           {
+ *               "category_id": 1,
+ *               "category_name": "Car Payment",
+ *               "category_type": "Personal",
+ *               "user_id": null
+ *           },
  *          {
  *              "category_id": 2,
  *              "category_name": "Car Insurance",
@@ -177,11 +178,7 @@ router.put('/:id', validCategoryData, async (req, res, next) => {
     try {
         const category = req.body;
         const id = req.params.id;
-        const categories = await Categories.update(
-            category,
-            id,
-            req.token.subject
-        );
+        const categories = await Categories.update(category, id, req.token.sub);
         res.status(200).json(categories);
     } catch (err) {
         next({ err, stat: 500, message: 'Error while updating a category.' });
@@ -199,7 +196,7 @@ router.put('/:id', validCategoryData, async (req, res, next) => {
  * {
  *    "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6InRlc3QxIiwiaWF0IjoxNTY3MDE4OTcxLCJleHAiOjE1NjcwMzMzNzF9.75Q_EUManFaIczoccxkSC9LgFRm-zC5w3eeAHuhIWsg"
  *}
-* @apiSuccess (200) {Object[]} category Array of category objects
+ * @apiSuccess (200) {Object[]} category Array of category objects
  *@apiSuccess (200) {Number} category.category_id ID of category
  *@apiSuccess (200) {String} category.category_name Name of category
  *@apiSuccess (200) {String} category.category_type Either personal or relocation
@@ -208,12 +205,12 @@ router.put('/:id', validCategoryData, async (req, res, next) => {
  * @apiSuccessExample {json} Success-Response:
  *      HTTP 200 OK
  *      [
-*           {
-*               "category_id": 1,
-*               "category_name": "Car Payment",
-*               "category_type": "Personal",
-*               "user_id": null
-*           },
+ *           {
+ *               "category_id": 1,
+ *               "category_name": "Car Payment",
+ *               "category_type": "Personal",
+ *               "user_id": null
+ *           },
  *          {
  *              "category_id": 2,
  *              "category_name": "Car Insurance",
@@ -240,7 +237,7 @@ router.put('/:id', validCategoryData, async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
     try {
         const id = req.params.id;
-        const categories = await Categories.remove(id, req.token.subject);
+        const categories = await Categories.remove(id, req.token.sub);
         res.status(200).json(categories);
     } catch (err) {
         next({ err, stat: 500, message: 'Error while deleting a category.' });

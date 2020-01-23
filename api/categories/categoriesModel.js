@@ -10,7 +10,9 @@ module.exports = {
 };
 
 function getAll(id) {
-    return db('categories').whereNull('user_id').orWhere('user_id', id);
+    return db('categories')
+        .whereNull('user_id')
+        .orWhere('user_id', id);
 }
 
 function findById(id) {
@@ -19,13 +21,15 @@ function findById(id) {
         .first();
 }
 
-function findByName(name){
-    return db('categories').where(name).first()
+function findByName(name) {
+    return db('categories')
+        .where(name)
+        .first();
 }
 
 function insert(category) {
     return db('categories')
-        .insert(category, "category_id")
+        .insert(category, 'category_id')
         .then(([id]) => findById(id));
 }
 

@@ -31,17 +31,21 @@ function restriction(req, res, next) {
     const token = req.headers.authorization;
 
     if (token) {
-        jwt.verify(token, process.env.JWT_SECRET || 'testing', (err, decodedToken) => {
-            if (err)
-                next({
-                    err,
-                    stat: 401,
-                    message:
-                        'Invalid token, please log in with valid credentials.',
-                });
-            else req.token = decodedToken;
-            next();
-        });
+        jwt.verify(
+            token,
+            process.env.JWT_SECRET || 'testing',
+            (err, decodedToken) => {
+                if (err)
+                    next({
+                        err,
+                        stat: 401,
+                        message:
+                            'Invalid token, please log in with valid credentials.',
+                    });
+                else req.token = decodedToken;
+                next();
+            }
+        );
     } else
         next({
             stat: 400,

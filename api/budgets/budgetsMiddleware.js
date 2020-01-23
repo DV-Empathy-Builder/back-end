@@ -31,7 +31,7 @@ async function validBudgetID(req, res, next) {
 }
 
 async function validateOwnerID(req, res, next) {
-    const userID = req.token.subject;
+    const userID = req.token.sub;
     const { id } = req.params;
     const budget = await Budgets.findById(id);
     if (budget.user_id === userID) next();

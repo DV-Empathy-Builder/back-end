@@ -13,7 +13,10 @@ async function validCategoryData(req, res, next) {
     if (list.array.includes(category.category_name))
         next({ stat: 400, message: 'Please use appropriate language.' });
     if (!category.category_name || !category.category_type)
-        next({ stat: 400, message: 'Please include a category_name and category_type.' });
+        next({
+            stat: 400,
+            message: 'Please include a category_name and category_type.',
+        });
     else next();
 }
 
@@ -31,7 +34,7 @@ async function validCategoryID(req, res, next) {
 }
 
 async function validateOwnerID(req, res, next) {
-    const userID = req.token.subject;
+    const userID = req.token.sub;
     const { id } = req.params;
     const category = await Categories.findById(id);
     if (category.user_id === userID) next();

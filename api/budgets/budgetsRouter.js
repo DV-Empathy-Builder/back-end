@@ -47,7 +47,7 @@ router.use('/:id', validBudgetID, validateOwnerID);
  */
 router.get('/', async (req, res, next) => {
     try {
-        const user_id = req.token.subject;
+        const user_id = req.token.sub;
         const budgets = await Budgets.getByUserId(user_id);
         res.status(200).json(budgets);
     } catch (err) {
@@ -72,7 +72,7 @@ router.get('/', async (req, res, next) => {
  * @apiSuccessExample {json} Success-Response:
  *      HTTP 200 OK
  *[
- *    {
+ *    {w
  *        "line_id": 1,
  *        "amount": 80,
  *        "category_id": 1,
@@ -149,7 +149,7 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', validBudgetName, async (req, res, next) => {
     try {
         const budget_name = req.body.budget_name;
-        const user_id = req.token.subject;
+        const user_id = req.token.sub;
         const newBudget = { budget_name, user_id };
         const createdBudget = await Budgets.addBudget(newBudget);
         res.status(201).json(createdBudget);
@@ -207,7 +207,7 @@ router.post('/', validBudgetName, async (req, res, next) => {
 router.post('/:id', async (req, res, next) => {
     try {
         const lines = req.body.lines;
-        const user_id = req.token.subject;
+        const user_id = req.token.sub;
         const { id } = req.params;
         lines.forEach(line => {
             line.user_id = +user_id;
@@ -258,7 +258,7 @@ router.post('/:id', async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
     try {
         const { id } = req.params;
-        const user_id = req.token.subject;
+        const user_id = req.token.sub;
         const remainingBudgets = await Budgets.remove(id, user_id);
         res.status(200).json(remainingBudgets);
     } catch (err) {
@@ -304,7 +304,7 @@ router.delete('/:id', async (req, res, next) => {
 router.put('/:id', validBudgetName, async (req, res, next) => {
     try {
         const budget_name = req.body.budget_name;
-        const user_id = req.token.subject;
+        const user_id = req.token.sub;
         const { id } = req.params;
         const updatedBudget = await Budgets.updateName(
             { budget_name, user_id },

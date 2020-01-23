@@ -18,11 +18,7 @@ function findById(id) {
 }
 
 function findByUsername(username) {
-    try {
-        return db('users')
-            .where({ username })
-            .first();
-    } catch (err) {
-        res.status(599).json({ message: 'I hate heroku.' });
-    }
+    return db('users')
+        .where({ username })
+        .first();
 }
